@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<title>PORTFOLIO</title>
+<link href="css/apps.css" rel="stylesheet"/>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+$(document).ready(function() {
+	$(".pop>.bg").fadeTo(0,0.5);
+	resizePop();
+});
+$(window).resize(function(){
+	resizePop();
+});
+function resizePop(){
+	if($(document).width() <= 1023){
+		$(".pop>.bg").css("width","1023px");
+	}else{
+		$(".pop>.bg").css("width","100%");
+	}
+	if($(document).height() <= 800){
+		$(".pop>.bg").css("height","800px");
+	}else{
+		$(".pop>.bg").css("height",$(document).height());
+	}
+}
+function start(){
+	location.href="main.html";
+}
+function popRank(){
+	$(".pop").css("display","block")
+	$(".game_means").css("display","none");
+	$(".game_rank").css("display","block");
+}
+function popMean(){
+	$(".pop").css("display","block")
+	$(".game_means").css("display","block");
+	$(".game_rank").css("display","none");
+}
+function close(){
+	$(".pop").css("display","none")
+}
+
+
+</script>
+<style>
+body{ background-color:#4a5e3f}
+.wrap{ background:url(img/bg_quiz.png) center top repeat-x scroll; min-width:1023px;   height:800px;}
+.content{width:1023px; margin:0 auto; position:relative;}
+.logo{position:absolute; top:0px; left:3px;}
+.btn_quiz{position:absolute; top:7px; right:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="content">
+        <h1><a class="btn logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_quiz" href="main.html"><img src="img/btn_game.png" alt="낱말퀴즈 이벤트GO"/></a>
+    </div>
+</div>
+</body>
+</html>

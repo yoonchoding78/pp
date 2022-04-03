@@ -1,0 +1,336 @@
+<html class="ui-mobile"><head><base href="http://m.prefemin.co.kr/">
+<meta charset="utf-8">
+<meta name="keywords" content="종근당,프리페민,prefemin,zeller,월경,월경전 증후군">
+<meta name="description" content="월경전증후군 치료제 프리페민정">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>PORTFOLIO</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/common.js"></script>
+<script>
+var mobilecheck = function () {
+var check = false;
+ (function(a,b){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
+ return check;
+}
+
+
+
+$(document).ready(function() {
+	if($(window).height()*0.7<$(window).width()){
+		$(".index").css("width","85%")
+		perNum=0.0035;
+	}else{
+		$(".index").css("width","100%")
+		perNum=0;
+	}
+	active_gnb(1);
+	gnb_set(true);
+	motion_arow1()
+});
+function motion_arow1(){
+	$(".arow").animate({bottom:"2%"},500,function(){
+		motion_arow2()
+	});
+}
+function motion_arow2(){
+	$(".arow").animate({bottom:"0%"},500,function(){
+		motion_arow1()
+	});
+}
+
+function remove_touch_event(){
+	$("body").unbind('touchstart');
+	$("body").unbind('touchmove');
+	$("body").unbind('touchend');
+}
+function add_touch_event(){
+	$("body").bind('touchstart', function(event){
+		if(isScroll == true){
+			$(".arow").css("display","none");
+			var data = event.originalEvent.touches?event.originalEvent.touches[ 0 ] : event;
+			tStrat = data.pageY;
+		}
+		event.preventDefault();
+	});
+	$("body").bind('touchmove', function(event){
+		if(isScroll == true){
+			var data = event.originalEvent.touches?event.originalEvent.touches[ 0 ] : event;
+			tEnd = data.pageY;
+		}
+		event.preventDefault()
+	});
+	$("body").bind('touchend', function(event){
+		if(isScroll == true){
+			clearInterval(timeid);
+			$(".product>img").attr("src","img/3d_box_000"+pfendArr[overNum]+".gif");
+			if(tEnd-tStrat>0){
+				if(preOverNum!=0){
+					gifNum = pfendArr[overNum]
+					timeid = setInterval("aniGif("+pfendArr[overNum]+","+pfstartArr[overNum]+")",30)
+					overNum--;
+					$('.product').animate({top:pyArr[overNum+1]+"%",left:pxArr[overNum+1]+"%",width:psArr[overNum+1]+"%"},speed);
+				}
+			}else if(tEnd-tStrat<0){
+				if(preOverNum!=4){
+				overNum++;
+				gifNum = pfstartArr[overNum];
+				timeid = setInterval("aniGif("+pfstartArr[overNum]+","+pfendArr[overNum]+")",30);
+				$('.product').animate({top:pyArr[overNum+1]+"%",left:pxArr[overNum+1]+"%",width:psArr[overNum+1]+"%"},speed);
+				}
+			}
+			if(overNum<0){
+				overNum = 0;
+			}else if(overNum>=4){
+				overNum = 4;
+			}
+			if(preOverNum!=4 || preOverNum!=0){
+				if(overNum>=1){
+					$(".btn_top").css("display","block")
+				}else{
+					$(".btn_top").css("display","none")
+				}
+				$('.wrap').animate({top: -scrollArr[overNum+1]},speed,function(){ 
+					if(overNum != 4){
+						$(".arow").css("display","block")
+					}
+					isScroll = true;
+					visible_deco()
+				});
+			}else{
+				isScroll = true;
+			}
+			preOverNum = overNum;
+		}
+		isScroll = false;
+		event.preventDefault()
+	});
+}
+
+function visible_deco(){
+	$(".deco").css("display","none");
+	$(".deco"+(overNum+1)).css("display","block");
+}
+
+$(window).load(function(){
+	scroll_arr();
+	$("body").addClass("index_bg");
+	$(".btn_product_info").bind("tap",function(){
+		location.href = "prefemin.html";
+	});
+	$(".btn_top").bind("tap",function(){
+		location.href = "index.html";
+	});
+	$( window ).orientationchange();
+});
+
+function scroll_arr(){
+	scrollArr[1] = $(".wrap").height() * 0.0;
+	scrollArr[2] = $(".wrap").height() * (0.2095+perNum);
+	scrollArr[3] = $(".wrap").height() * (0.41+perNum);
+	scrollArr[4] = $(".wrap").height() * (0.612+perNum);
+	scrollArr[5] = $(".wrap").height() * (0.8128+perNum);
+	//scrollArr[6] = $(".wrap").height() * (0.8105+perNum);
+	//scrollArr[7] = $(".wrap").height() * (0.9+perNum);
+}
+
+var perNum=0;//85%일때
+var speed = 1200
+var timeid;
+var preOverNum;
+
+var tStrat;
+var tEnd;
+var scrollTopNum;
+var preScrollTopNum=0;
+var pxArr = [];
+var pyArr = [];
+var psArr = [];
+var pfstartArr = [];
+var pfendArr = [];
+var scrollArr = [];
+var scrollArrPre = [];
+var overNum=0;
+
+pfstartArr[0] = 28;
+pfstartArr[1] = 2;
+pfstartArr[2] = 28//pfendArr[1];
+pfstartArr[3] = 0;//pfendArr[2];
+pfstartArr[4] = 28;//pfendArr[3];
+pfstartArr[5] = 2;//pfendArr[4];
+
+pfstartArr[6] = 0;//pfendArr[5];
+pfstartArr[7] = 0;
+
+pfendArr[0] = 2;
+pfendArr[1] = 28;
+pfendArr[2] = 0;
+pfendArr[3] = 28;
+pfendArr[4] = 2;
+
+pfendArr[5] = 0;
+pfendArr[6] = 0;
+pfendArr[7] = 0;
+
+psArr[1] = 71;
+psArr[2] = 61;
+psArr[3] = 61;
+psArr[4] = 56.6;
+psArr[5] = 76;
+psArr[6] = 67;
+psArr[7] = 67;
+
+pxArr[1] = 37;
+pxArr[2] = -3;
+pxArr[3] = 39;
+pxArr[4] = 0;
+pxArr[5] = 32;
+pxArr[6] = 17;
+pxArr[7] = 17;
+
+pyArr[1] = 8.5;
+pyArr[2] = 27.3;
+pyArr[3] = 50.7;
+pyArr[4] = 66.3;
+pyArr[5] = 89.2;
+pyArr[6] = 84.4;
+pyArr[7] = 84.4;
+var gifNum;
+var autoScrollNum;
+var isScroll = true;
+
+function aniGif(start,end){
+	if(start<end){
+		gifNum++;
+		if(end < gifNum){
+			clearInterval(timeid);
+		}else if(end >= gifNum){
+			$(".product>img").attr("src","img/3d_box_000"+gifNum+".gif");
+		}
+	}else if(start>end){
+		gifNum--
+		if(end > gifNum){
+			clearInterval(timeid);
+		}else if(end <= gifNum){
+			$(".product>img").attr("src","img/3d_box_000"+gifNum+".gif")
+		}
+	}
+}
+$(window).on( "orientationchange", function( event ) {
+	 $(".btn_top").css("display","none");
+	 if(event.orientation == "portrait"){
+		sero();
+		scroll_arr();
+		init();
+	 }else if(event.orientation == "landscape"){
+	 	isScroll = false;
+		garo();
+		init()
+	 }
+	
+});
+function garo(){
+	
+	$(".pop_w").css("display","block");
+	$(".wrap").css("width",$(".pop_w").width());
+	$(".wrap").css("height",$(".pop_w").height());
+	remove_touch_event();
+}
+function sero(){
+	
+	$(".pop_w").css("display","none");
+	$(".wrap").css("width","auto");
+	$(".wrap").css("height","auto");
+	add_touch_event();
+}
+function init(){
+
+	preScrollTopNum=0;
+	overNum=0;
+	$(".wrap").css("top",scrollArr[1]);
+	//$('.product').animate({top:pyArr[1]+"%",left:pxArr[1]+"%",width:psArr[1]+"%"},1000,function(){isScroll = true;});
+	$('.product').css("top",pyArr[1]+"%").css("width",psArr[1]+"%").css("left",pxArr[1]+"%")
+	$('html, body').animate({scrollTop:0},1000,function(){isScroll = true;});
+}
+function garo_pop_close(){
+	$(".wrap").css("width","auto");
+	$(".wrap").css("height","auto");
+	$(".pop_w").css("display","none");
+}
+</script>
+</head>
+<body class="ui-mobile-viewport ui-overlay-a index_bg" style="font-size: 2.3584em;"><div data-role="page" data-url="/" tabindex="0" class="ui-page ui-page-theme-a ui-page-active">
+<div class="wrap" style="display: block; width: 1903px; height: 1189px; top: 0px;">
+<!--gnb-->
+<header class="con header"><div class="con header_top"><img class="" src="img/bg_header_top.png" alt=""><h1 class="logo"><a class="btn_logo"><img src="img/logo.png" alt="종근당"></a></h1><a class="btn btn_left btn_home"><img src="img/btn_left.png" alt="홈버튼"></a><a class="btn btn_fb"><img src="img/btn_fb.gif" alt="페이스북"></a><a class="btn btn_tel"><img src="img/btn_tel.png" alt="전화통화"></a></div><nav class="con"><ul class="gnb"><li><a class="gnb1"><img src="img/gnb1_over.png" alt=""></a></li><li><a class="gnb2"><img src="img/gnb2_out.png" alt=""></a></li><li><a class="gnb3"><img src="img/gnb3_out.png" alt=""></a></li><li><a class="gnb4"><img src="img/gnb4_out.png" alt=""></a></li></ul></nav></header>
+<!--gnb end-->
+    <div class="index" style="width: 85%;">
+        <img src="img/p1.jpg">
+        <img src="img/null_01.jpg">
+        <img src="img/p2.jpg">
+        <img src="img/null_01.jpg">
+        <img src="img/p3.jpg">
+        <img src="img/null_01.jpg">
+        <img src="img/p4.jpg">
+        <img src="img/null_01.jpg">
+        <img src="img/p5.gif">
+        <!--
+		<img src="img/null_05.gif"/>
+        <img src="img/p6.gif"/>
+		-->
+        <div class="product" style="top: 8.5%; width: 71%; left: 37%;"><img src="img/3d_box_0002.gif" alt=""></div> 
+		
+        <a class="btn_product_info ui-link"><img src="img/btn_product_info.png"></a>
+        <img class="deco deco1" style="left: 45%; position: absolute; top: 9.4%; width: 55%;" src="img/deco1.png">
+        <img class="deco deco3" style="left: 87%; position: absolute; top: 51.3%;width: 12%" src="img/deco3.png">
+        <img class="deco deco4" style="left: 1%; position: absolute; top: 67.2%; width: 57%;" src="img/deco4.png">
+        <img class="deco deco5" style="left: 41%; position: absolute; top: 91%; width: 59%;" src="img/deco5.png">
+    </div>
+</div>
+<a href="#" class="btn_top ui-link" style="display: none;"><img src="img/btn_top.png" alt="위로 가기"></a>
+<img class="arow" style="position: fixed; width: 14%; bottom: 0.551426%; left: 43%; opacity: 0.75; z-index: 10000;" src="img/arrow.png" alt="">
+<div class="pop_w" style="display: block;">
+	<img src="img/bg_pop_w.png" style="z-index:9999">
+    <a href="javascript:garo_pop_close()" class="btn_pop_close ui-link"><img src="img/btn_pop_close.png" alt="닫기"></a>
+</div>
+<div class="aniGif" style="display:none;">
+<img src="img/3d_box_0000.gif">
+<img src="img/3d_box_0001.gif">
+<img src="img/3d_box_0002.gif">
+<img src="img/3d_box_0003.gif">
+<img src="img/3d_box_0004.gif">
+<img src="img/3d_box_0005.gif">
+<img src="img/3d_box_0006.gif">
+<img src="img/3d_box_0007.gif">
+<img src="img/3d_box_0008.gif">
+<img src="img/3d_box_0009.gif">
+<img src="img/3d_box_00010.gif">
+<img src="img/3d_box_00011.gif">
+<img src="img/3d_box_00012.gif">
+<img src="img/3d_box_00013.gif">
+<img src="img/3d_box_00014.gif">
+<img src="img/3d_box_00015.gif">
+<img src="img/3d_box_00016.gif">
+<img src="img/3d_box_00017.gif">
+<img src="img/3d_box_00018.gif">
+<img src="img/3d_box_00019.gif">
+<img src="img/3d_box_00020.gif">
+<img src="img/3d_box_00021.gif">
+<img src="img/3d_box_00022.gif">
+<img src="img/3d_box_00023.gif">
+<img src="img/3d_box_00024.gif">
+<img src="img/3d_box_00025.gif">
+<img src="img/3d_box_00026.gif">
+<img src="img/3d_box_00027.gif">
+<img src="img/3d_box_00028.gif">
+<img src="img/3d_box_00029.gif">
+</div>
+
+<!-- AceCounter Mobile WebSite Gathering Script V.7.5.20120817 -->
+
+
+<noscript>&lt;img src='http://gmb.acecounter.com/mwg/?mid=AZ3A61257&amp;tp=noscript&amp;ce=0&amp;' border=0 width=0 height=0&gt;</noscript>
+<!-- AceCounter Mobile Gathering Script End -->  
+</div><div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon-loading"></span><h1>loading</h1></div></body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function(e) {
+	gNum = getLocationParameter('code');
+	$(".pop_timer_com").attr("src","img/pop_timer"+gNum+"_com.jpg")
+	$(".report_txt").attr("src","img/report"+gNum+"_txt.png")
+	
+	$(".label").click(function(){
+		if($("#chk").is(":checked") == true){
+			$("#chk").attr("checked",false);
+		}else{
+			$("#chk").attr("checked",true);
+		}
+	})
+	
+});
+var txtNum=0;
+var gNum
+var isOver = false;
+var id
+function timerGif(){
+	var timer = $(".report_over")
+	id = setInterval(function(){
+		if(isOver == false){
+			
+			isOver=true;
+			txtNum++;
+			
+			if(txtNum<=3){
+				timer.css("display","block")
+				$(".report"+txtNum).css("display","block");
+				
+				btn_center
+			}else{
+				$(".btn_center").css("display","block");
+				timer.css("display","none")
+				clearInterval(id);
+			}
+		}else{
+			timer.css("display","none")
+			isOver=false;
+		}
+	},500)
+}
+function go_report(){
+	$(".con_timer_com").css("display","none")
+	$(".con_report_com").css("display","block")
+	timerGif();
+}
+function go_center(){
+	$(".pop").css("display","block");
+	if(gNum==4){
+		$(".pop_img_com").css("display","block");
+		$(".pop_img").css("display","none");
+		$(".pop_img1").css("display","none");
+	}else{
+		$(".pop_img").css("display","block");
+		$(".pop_img1").css("display","none");
+		$(".pop_image").attr("src","img/bg_com"+gNum+".jpg");
+	}
+}
+function next_game(){
+	gNum++;
+	location.href="before_game.html?code="+gNum
+}
+
+
+function pop_close(){
+	$(".pop").css("display","none");
+	$(".pops").css("display","none");
+}
+function pop_stop(){
+	$(".pop_img").css("display","none");
+	$(".pop_img1").css("display","block");
+}
+function pop_input(){
+	$(".pops").css("display","none")
+	$(".pop_input").css("display","block")
+}
+function pop_time_safe(){
+	$(".pops").css("display","none")
+	$(".pop_time_safe").css("display","block")
+}
+function pop_agent(){
+	$(".pops").css("display","none")
+	$(".pop_agent").css("display","block")
+}
+</script>
+<style>
+body{ background-color:#e5e5e5}
+.wrap{position:relative;}
+.btn_111 {position:absolute;   top:79.04%;   left:13.72%;   width:70.43%;} 
+
+.pop{width:100%; height:100%; position:absolute; top:0; left:0; display:none;}
+
+.pop_img{ display:none; z-index:200;}
+.pop_img1{display:none;z-index:201;}
+.pop_img_com{ display:none;z-index:202;}
+.pop_input{position:relative; display:none; z-index:203; }
+.pop_time_safe{display:none;z-index:204;}
+
+
+.con_report_com{display:none}
+.con_pop_timer_com{position:absolute;   top:28.44%;   left:33.02%;   width:34.17%;} 
+
+.report_txt {position:absolute;   top:25.78%;   left:49.79%;   width:44.90%;}    
+.report_over {position:absolute;   top:38.75%;   left:8.54%;   width:9.58%;display:none;}
+.btn_center{position:absolute;   top:73.75%;   left:55.83%;   width:32.40%; display:none;} 
+.report1 {position:absolute;   top:49.38%;   left:60.94%;   width:5.94%; display:none;} 
+.report2 {position:absolute;   top:49.38%;   left:68.13%;   width:5.94%;display:none;}   
+.report3 {position:absolute;   top:49.38%;   left:75.63%;   width:5.94%;display:none;}   
+
+.btn_no {position:absolute;   top:80.63%;   left:51.04%;   width:29.27%;}    
+.btn_yes {position:absolute;   top:80.78%;   left:19.79%;   width:29.27%;} 
+.btn_no1  {position:absolute;   top:58.91%;   left:51.25%;   width:29.27%;}    
+.btn_yes1{position:absolute;   top:59.06%;   left:19.79%;   width:29.27%;} 
+.btn_issue {position:absolute;   top:82.34%;   left:32.40%;   width:35.52%;}
+.btn_close {position:absolute;   top:2.81%;   left:93.13%;   width:3.65%;}  
+.btn_comic {position:absolute;   top:51.25%;   left:64.90%;   width:17.92%;}    
+.btn_toon {position:absolute;   top:51.25%;   left:45.52%;   width:17.92%;}  
+
+
+.text_box{padding:0 1%; font-size:13px; color:#000; background-color:transparent; border:none;}
+.name{ position:absolute;   top:35.00%;   left:32.29%;   width:45.08%; height:6%;}
+.tel1{position:absolute;   top:43.44%;   left:32.29%;   width:12.17%; height:6%;}
+.tel2{position:absolute;   top:43.44%;   left:48.29%;   width:12.17%; height:6%;}
+.tel3{position:absolute;   top:43.44%;   left:65.29%;   width:12.17%; height:6%;}
+.textarea_box{position:absolute;   top:59.06%;   left:22.19%;   width:53.29%; height:11%; overflow-x:hidden; overflow-y:auto;margin:1% 1%; }
+.chk_box{position:absolute;   top:75.63%;   left:22%;  }
+.label{position:absolute;   top:75.63%;   left:26%;   width:13.65%;  display:block;}
+.btn_input{position:absolute;   top:80.94%;   left:34.17%;   width:30.31%;}  
+
+
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+
+<div class="con_timer_com">
+    <img src="img/bg_timer_com.jpg">
+    <div class="con_pop_timer_com">
+    	<img class="pop_timer_com" src="img/pop_timer1_com.jpg">
+        <a href="javascript:go_report()" class="btn_111" ><img src="img/btn_111.png" alt="111로 본부보고"></a>
+    </div>
+</div>
+<div class="con_report_com">
+	<img src="img/bg_report_com.jpg" >
+    <a href="javascript:go_center()" class="btn_center"><img src="img/btn_center_report.png"/></a>
+    <img class="report_txt" src="img/report1_txt.png">
+    <img class="report_over" src="img/report_over.png">
+    <div>
+    	<img class="report1" src="img/report1.png">
+        <img class="report2" src="img/report1.png">
+        <img class="report3" src="img/report1.png">
+    </div>
+</div>
+
+</div>
+
+<!--pop-->
+<div class="pop">
+
+    <div class="pops pop_img">
+    <img class="pop_image" src="img/bg_com1.jpg"/>
+      <a href="javascript:next_game()" class="btn_yes" ><img src="img/btn_yes.png" alt="yes"/></a>
+      <a href="javascript:pop_stop()" class="btn_no" ><img src="img/btn_no.png" alt="no"/></a>
+    </div>
+    
+    
+    <div class="pops pop_img1">
+    <img class="pop_image1" src="img/pop_stop.jpg"/>
+    <a href="index.html" class="btn_yes1" ><img src="img/btn_yes1.png" alt="yes"/></a>
+    <a href="javascript:pop_close()" class="btn_no1" ><img src="img/btn_no1.png" alt="no"/></a>
+    </div>
+    
+    
+    <div class="pops pop_img_com">
+    <img class="pop_image" src="img/bg_com4.jpg"/>
+    <a href="javascript:pop_input()" class="btn_issue" ><img src="img/btn_issue.png" alt="nis요원증발급받기"/></a>
+    </div>
+    
+    
+    <div class="pops pop_time_safe">
+    <img src="img/pop_time_safe.jpg" border="0" />
+     <a href="javascript:pop_close()" class="btn_close"><img src="img/btn_close.png" alt="닫기" /></a>
+     <a href="http://www.nis.go.kr/svc/affair.do?method=content&cmid=12896" target="_blank"  class="btn_toon"><img src="img/btn_toon.png" alt="대공사건무빙툰" /></a>
+     <a href="http://www.111.go.kr/svc/gist.do?method=content&cmid=12809" target="_blank" class="btn_comic"><img src="img/btn_comic.png" alt="만화로 보는 방첩활동" /></a>
+    </div> 
+    
+    
+    
+    <div class="pops pop_input">
+    <img src="img/pop_input.jpg" border="0" />
+        <input type="text" class="text_box name" title="이름"/>
+        <input type="text" class="text_box tel1" title="전화번호 앞자리"/>
+        <input type="text" class="text_box tel2" title="전화번호 중간자리"/>
+        <input type="text" class="text_box tel3" title="전화번호 뒷자리"/>
+        <div class="text_box textarea_box">
+           <p>[개인 정보 수집·이용 동의]</p>
+            <ul>       
+            <li>1. 수집 및 이용하는 개인 정보 항목 <br>
+            * 수집 항목 : 이름, 휴대 전화 번호 <br>
+            * 개인 정보 수집 방법 : 이벤트 응모
+            </li>
+            <li>2. 개인 정보의 수집 및 이용 목적 * 이벤트 참여 목적<br> 
+            - 개인 식별, 당첨자 선정과 안내, 경품 배송<br> 
+            - 당첨 관련 분쟁 조정을 위한 기록 보존과 편의 사항 처리 등 <br> 
+            * 회사가 수집한 개인 정보는 명시한 목적 이외의 다른 어떤 용도로도 사용되지 않음</li>
+            <li>3. 개인 정보의 보유 및 이용 기간 : 당첨자 대상 경품 발송 후 1개월까지 보유 후 파기</li>
+            </ul>
+        </div>
+        <input type="checkbox" class="chk_box" id="chk"/><img class="label" src="img/txt_agree.png"/>
+        <a href="javascript:pop_time_safe()" class="btn_input"><img src="img/btn_input.png" /></a>
+        <a href="javascript:pop_agent()" class="btn_close"><img src="img/btn_close.png" /></a>
+    </div>
+    
+ 
+
+</div>
+<!--pop-->
+</body>
+</html>

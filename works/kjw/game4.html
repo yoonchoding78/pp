@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function() {});
+$(window).load(function(){
+	bi100 = $(".bg_stage4").height()/100;
+	//setStage4();
+})
+
+function start(){
+	$(".stage").css("top","79px");
+	setStage4();
+}
+var bi;
+var bi100;
+function setStage4(){
+	s4down()
+}
+function s4down(){
+	var num = parseInt($(".s4_code0101").css("top"));
+	console.log(num/bi100);
+	
+	if(Number(num/bi100) <= -85){
+		$(".s4_code0101").css("top","-100%")
+		alert("게임클리어")
+		location.href="after_game.html?code=4"
+	}else if(Number(num/bi100) >= 0){
+		$(".s4_code0101").css("top",0);
+		alert("실패")
+	}else{
+		setTimeout(function(){
+			$(".s4_code0101").css("top",parseInt($(".s4_code0101").css("top"))+10);	
+			s4down()
+		},1000)
+	}
+}
+
+function btn_s4_click(){
+	$(".out").css("display","none");	
+	$(".over").css("display","block");	
+	setTimeout(function(){	
+		$(".out").css("display","block");	
+		$(".over").css("display","none");	
+	},100)
+	$(".s4_code0101").css("top",parseInt($(".s4_code0101").css("top"))-20);	
+	
+}
+</script>
+<style>
+body{color:#000; font-size:1.2em;}
+.stage{position:absolute; /*top:79px;*/ top:-100%;left:22px; width:980px; height:430px;overflow:hidden;}
+.btn_s4_click{position:absolute; top:134px; left:794px; width:20%;}
+.over{display:none;}
+.s4_code0101{position:absolute; top:-20%; left:0;}
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+<img src="img/bg_game4.jpg" usemap="#Map"/>
+<map name="Map">
+  <area shape="rect" coords="374,418,653,476" href="javascript:start()" alt="게임시작">
+</map>
+<div class="stage stage4">
+<img class="bg_stage4" src="img/bg_stage4.png"/>
+<img class="s4_code0101" src="img/s4_code0101.png"/>
+
+
+<a class="btn_s4_click" href="javascript:btn_s4_click()"><img class="out" src="img/s4_btn_out.png"/><img class="over" src="img/s4_btn_over.png"/></a>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function(e) {
+	gNum = getLocationParameter('code');
+	$(".pop_timer_com").attr("src","img/pop_timer"+gNum+"_com.jpg")
+	$(".report_txt").attr("src","img/report"+gNum+"_txt.png")
+	$(".pop_bg").fadeTo(0,0.75);
+	$(".pop_bg").css("height",$(document).height())
+});
+var txtNum=0;
+var gNum
+var isOver = false;
+var id
+function timerGif(){
+	var timer = $(".report_over")
+	id = setInterval(function(){
+		if(isOver == false){
+			
+			isOver=true;
+			txtNum++;
+			
+			if(txtNum<=3){
+				timer.css("display","block")
+				$(".report"+txtNum).css("display","block");
+				
+				btn_center
+			}else{
+				$(".btn_center").css("display","block");
+				timer.css("display","none")
+				clearInterval(id);
+			}
+		}else{
+			timer.css("display","none")
+			isOver=false;
+		}
+	},500)
+}
+function go_report(){
+	$(".con_timer_com").css("display","none")
+	$(".con_report_com").css("display","block")
+	timerGif();
+}
+function go_center(){
+	$(".pop").css("display","block");
+	if(gNum==4){
+		$(".pop_img_com").css("display","block");
+		$(".pop_img").css("display","none");
+		$(".pop_img1").css("display","none");
+	}else{
+		$(".pop_img").css("display","block");
+		$(".pop_img1").css("display","none");
+		$(".pop_image").attr("src","img/bg_com"+gNum+".png");
+	}
+}
+function next_game(){
+	gNum++;
+	location.href="before_game.html?code="+gNum
+}
+
+
+function pop_close(){
+	$(".pop").css("display","none");
+	$(".pops").css("display","none");
+}
+function pop_stop(){
+	$(".pop_img").css("display","none");
+	$(".pop_img1").css("display","block");
+}
+function pop_input(){
+	$(".pops").css("display","none")
+	$(".pop_input").css("display","block")
+}
+function pop_time_safe(){
+	$(".pops").css("display","none")
+	$(".pop_time_safe").css("display","block")
+}
+function pop_agent(){
+	$(".pops").css("display","none")
+	$(".pop_agent").css("display","block")
+}
+</script>
+<style>
+body{ background-color:#e5e5e5}
+.wrap{position:relative; width:1024px; height:750px; margin:0 auto;}
+.pop{width:100%; height:100%; position:absolute; top:0; left:0; display:none;}
+.pop_bg{width:100%; height:100%; position:absolute; top:0; left:0; background-color:#000; z-index:100;}
+
+.pop_img{position:relative; width:801px; margin:26px auto 0 auto; display:none; z-index:200;}
+.pop_img1{position:relative; width:560px; margin:186px auto 0 auto; display:none;z-index:201;}
+.pop_img_com{display:none; position:relative; width:801px; margin:26px auto 0 auto; display:none;z-index:202;}
+.pop_input{position:relative; width:580px; height:539px; margin:106px auto 0 auto; display:none; z-index:203; background:url(img/pop_input.png) 0 0 no-repeat;}
+.pop_time_safe{display:none; position:relative; width:680px; margin:111px auto 0 auto; display:none;z-index:204;}
+.pop_agent{position:relative; width:580px; height:539px; margin:106px auto 0 auto; z-index:203; background:url(img/pop_agent.png) 0 0 no-repeat; display:none;}
+
+.con_report_com{display:none}
+.con_pop_timer_com{position:absolute; top: 27.63%; left: 33.1%; }  
+.report_txt {position:absolute;   top:25.20%;   left:49.71%;}    
+.report_over {position:absolute;   top:36.67%;   left:8.35%; display:none;}
+.btn_center{position:absolute;   top:70.13%;   left:57.13%; display:none;} 
+.report1 {position:absolute;   top:48.27%;   left:60.94%;   width:5.86%; display:none;} 
+.report2 {position:absolute;   top:48.27%;   left:68.55%;   width:5.86%;display:none;}   
+.report3 {position:absolute;   top:48.27%;   left:75.88%;   width:5.86%;display:none;}   
+
+
+.text_box{padding:6px 4px; font-size:13px; color:#000; background-color:transparent; border:none;}
+.name{position:absolute; top:170px; left:162px; width:322px;}
+.tel1{position:absolute; top:210px; left:162px; width:90px;}
+.tel2{position:absolute; top:210px; left:276px; width:90px;}
+.tel3{position:absolute; top:210px; left:391px; width:90px;}
+.textarea_box{position:absolute; top:281px; left:90px; width:385px; height:70px; overflow-x:hidden; overflow-y:auto;margin:5px 4px; }
+.chk_box{left: 86px;position: absolute; top: 380px; }
+.label{left: 110px; position: absolute;top: 376px;}
+.btn_input{position:absolute;  top: 424px;left: 170px;}
+.btn_close{position:absolute;   top: 61px;left: 520px;}
+.btn_agent{position:absolute; top: 257px;
+  left: 170px;}
+
+
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+
+<div class="con_timer_com">
+    <img src="img/bg_timer_com.jpg">
+    <div class="con_pop_timer_com">
+    	<img class="pop_timer_com" src="img/pop_timer1_com.jpg" usemap="#Map2">
+        <map name="Map2">
+          <area shape="rect" coords="54,296,294,349" href="javascript:go_report()" alt="111로 본부보고">
+        </map>
+    </div>
+</div>
+<div class="con_report_com">
+	<img src="img/bg_report_com.jpg" >
+    <a href="javascript:go_center()" class="btn_center"><img src="img/btn_center.gif"/></a>
+    <img class="report_txt" src="img/report1_txt.png">
+    <img class="report_over" src="img/report_over.png">
+    <div>
+    	<img class="report1" src="img/report1.png">
+        <img class="report2" src="img/report1.png">
+        <img class="report3" src="img/report1.png">
+    </div>
+</div>
+
+</div>
+
+<!--pop-->
+<div class="pop">
+<div class="pop_bg"></div>
+
+    <div class="pops pop_img">
+    <img class="pop_image" src="img/bg_com1.png" usemap="#Map"/>
+    <map name="Map">
+      <area shape="rect" coords="186,569,386,617" href="javascript:next_game()" alt="yes">
+      <area shape="rect" coords="416,569,616,617" href="javascript:pop_stop()" alt="no">
+    </map>
+    </div>
+    
+    
+    <div class="pops pop_img1">
+    <img class="pop_image1" src="img/pop_stop.png" usemap="#Map1"/>
+    <map name="Map1">
+      <area shape="rect" coords="71,234,271,282" href="index.html" alt="yes">
+      <area shape="rect" coords="290,234,491,282" href="javascript:pop_close()" alt="no">
+    </map>
+    </div>
+    
+    
+    <div class="pops pop_img_com">
+    <img class="pop_image" src="img/bg_com4.png" usemap="#Mapcom"/>
+    <map name="Mapcom">
+      <area shape="rect" coords="280,581,523,629" href="javascript:pop_input()" alt="nis요원증발급받기">
+    </map>
+    </div>
+    
+    <div class="pops pop_input">
+    <input type="text" class="text_box name" title="이름"/>
+    <input type="text" class="text_box tel1" title="전화번호 앞자리"/>
+    <input type="text" class="text_box tel2" title="전화번호 중간자리"/>
+    <input type="text" class="text_box tel3" title="전화번호 뒷자리"/>
+    <div class="text_box textarea_box">
+       <p>[개인 정보 수집·이용 동의]</p>
+        <ul>       
+        <li>1. 수집 및 이용하는 개인 정보 항목 <br>
+        * 수집 항목 : 이름, 휴대 전화 번호 <br>
+        * 개인 정보 수집 방법 : 이벤트 응모
+        </li>
+        <li>2. 개인 정보의 수집 및 이용 목적 * 이벤트 참여 목적<br> 
+        - 개인 식별, 당첨자 선정과 안내, 경품 배송<br> 
+        - 당첨 관련 분쟁 조정을 위한 기록 보존과 편의 사항 처리 등 <br> 
+        * 회사가 수집한 개인 정보는 명시한 목적 이외의 다른 어떤 용도로도 사용되지 않음</li>
+        <li>3. 개인 정보의 보유 및 이용 기간 : 당첨자 대상 경품 발송 후 1개월까지 보유 후 파기</li>
+        </ul>
+    </div>
+    <input type="checkbox" class="chk_box" id="chk"/><label for="chk" class="label"><img class="txt_agree" src="img/txt_agree.png"/></label>
+    <a href="javascript:pop_time_safe()" class="btn_input"><img src="img/btn_input.png" /></a>
+	<a href="javascript:pop_agent()" class="btn_close"><img src="img/btn_close.png" /></a>
+    </div>
+    
+    <div class="pops pop_time_safe">
+    <img src="img/pop_time_safe.png" usemap="#Mapsafe" border="0" />
+    <map name="Mapsafe" id="Mapsafe">
+      <area shape="rect" coords="306,264,438,400" href="http://www.nis.go.kr/svc/affair.do?method=content&cmid=12896" target="_blank" alt="대공사건무빙툰"/>
+      <area shape="rect" coords="446,264,580,400" href="http://www.111.go.kr/svc/gist.do?method=content&cmid=12809" target="_blank" alt="만화로 보는 방첩활동"/>
+      <area shape="rect" coords="618,61,639,82" href="javascript:pop_close()" alt="닫기" />
+    </map>
+    </div>  
+
+</div>
+<!--pop-->
+</body>
+</html>

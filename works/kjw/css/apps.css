@@ -1,0 +1,13 @@
+@charset "utf-8";
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0;word-wrap:break-word}
+body,input,textarea,select,button,table{font-size:1.2em;line-height:1.2em;}
+body{position:relative; background-color:#e5e5e5;color:#000; font-family:"돋움",Dotum,"굴림",Gulim,Verdana,AppleGothic,sans-serif; height: 100%;}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{color:inherit;text-decoration:none;}
+.clearfix:after {content: "";display: block;clear: both;}
+.ir{text-indent:-9999px;position:absolute;}
+.con{position:relative;}
+.loading{background:url(../img/loading.gif) no-repeat center 100px scroll; }
+.wrap{position:relative; width:1024px; height:750px; margin:0 auto;}

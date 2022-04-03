@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<title>PORTFOLIO</title>
+<link href="css/apps.css" rel="stylesheet"/>
+<style>
+body{ background-color:#fdedcc}
+.btn_close {position:absolute;   top:0.53%;   left:90.00%;   width:8.42%;}    
+.btn_logo {position:absolute;   top:0.00%;   left:2.76%;   width:21.97%;} 
+.rank_set{font-family:"Nanum Gothic","돋움",Dotum,"굴림",Gulim,Verdana,AppleGothic,sans-serif; color:#592301; font-weight:bold; position:absolute; width:98%; height:77%; overflow-x:hidden;  overflow-y:auto; top:12%; left:0;padding:1%;}
+.top_rank{ font-size:1.2em}
+.con_rank{ font-size:1em}
+.rank_set li{margin-bottom:1%;}
+.top_rank .nn{width:5%; float:left; margin-top:4%;} 
+.top_rank .n1{width:2%;}
+.con_rank .nn{width:4%; float:left; margin-top:4%;} 
+.con_rank .n1{width:1.7%;}
+.txt{width:100%; height:100%; position:absolute; top:0; left:0;}
+.top_rank  .cho{float:left;margin-top:6%;} 
+.con_rank  .cho{float:left;margin-top:5%;} 
+.top_rank .n0{margin-left:72%; }
+.con_rank .n0{margin-left:72%; }
+.name{position:absolute; top:35%; left:20%;}
+.txt_rank{width:10%; position:absolute; top:31%; left:3%; text-align:center;}
+.btn_zoom {position:absolute;   top:93.55%;   left:72.89%;   width:4.34%;} 
+.txt_box{position:absolute; top:92.55%;   left:21.89%;   width:48.34%; height:3.8%; font-size:12px; color:#000; padding:1%; border:none;  background-color:transparent;}
+</style>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+$(document).ready(function() {
+popRank()
+responseScaleFontSize();
+});
+$(window).resize(function(){
+responseScaleFontSize();
+})
+function popRank(){
+	var rankTotal = 14;
+	var rankObj = {
+		"name1":"윤창수1",
+		"rank1":"0.020",
+		"name2":"윤창수2",
+		"rank2":"0.021",
+		"name3":"윤창수3",
+		"rank3":"0.022",
+		"name4":"윤창수4",
+		"rank4":"0.023",
+		"name5":"윤창수5",
+		"rank5":"0.024",
+		"name6":"윤창수6",
+		"rank6":"0.025",
+		"name7":"윤창수7",
+		"rank7":"0.026",
+		"name8":"윤창수1",
+		"rank8":"0.020",
+		"name9":"윤창수2",
+		"rank9":"0.021",
+		"name10":"윤창수3",
+		"rank10":"0.022",
+		"name11":"윤창수4",
+		"rank11":"0.023",
+		"name12":"윤창수5",
+		"rank12":"0.024",
+		"name13":"윤창수6",
+		"rank13":"0.025",
+		"name14":"윤창수7",
+		"rank14":"0.026"
+	}
+	for(var i=1; i<=rankTotal; i++){
+		rank(rankObj["rank"+i],i,rankObj["name"+i])
+	}
+}
+function rank(arr,num,name){
+   var hh;	
+   var strHtml="";
+   if(num<=3){
+		strHtml += '<li class="con top_rank con_rank'+num+'"><img src="img/bg_rank'+num+'.png"/><div class="txt">'
+		hh = 30;
+   }else{
+		strHtml += '<li class="con con_rank con_rank'+num+'"><img src="img/bg_rank.png"/><div class="txt">'
+		strHtml += '<span class="txt_rank">'+num+'</span>'
+		hh = 25;
+   }
+   strHtml += '<span class="name">'+name+' 님</span>'
+   strHtml += '<div class="nn n0"></div>'
+   strHtml += '<div class="nn n1"><img src="img/font/3/dot.png"/></div>'
+   strHtml += '<div class="nn n2"></div>'
+   strHtml += '<div class="nn n3"></div>'
+   strHtml += '<div class="nn n4"></div>'
+   strHtml += '<span class="cho">초</span>'
+   strHtml += '</div></li>'
+   $(".rank_set").append(strHtml);
+	for(var i=0; i<arr.length; i++){
+		if(i != 1){
+			$(".con_rank"+num+">.txt>.n"+i).html("<img src='img/font/3/"+i+".png'>");
+		}
+	}
+}
+function responseScaleFontSize(){
+	var fontSize = $(window).width()*0.0019;
+	if(fontSize < 0.9){
+		fontSize = 0.9;
+	}else if(fontSize > 1.5){
+		fontSize = 1.5;
+	}
+	$('html, body').css("font-size",fontSize+"em");
+}
+function go_bottom(){
+
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<div class="con">
+    	<img class="bg" src="img/pop_rank.png"/>
+        <h1><a class="btn btn_logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/btn_logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_close" href="index.html"><img src="img/btn_close.png" alt="닫기"/></a>
+		<ul class="rank_set"></ul>
+        <a class="go_bottom" style="position:fixed; top:14%; right:5%; width:12%;" href="javascript:go_bottom()"><img src="img/btn_bottom.png"></a>
+        <input type="text" class="txt_box" />
+        <a class="btn btn_zoom" href="#"><img src="img/btn_zoom.png" alt="검색"/></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=IE9">
+<title>YOON CHO DING</title>
+<script src="js/src/minified/TweenMax.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+<style>
+body, div{margin:0; padding:0;}
+body{ color:#000; line-height:1.5;font-family:"돋움",Dotum,"굴림",Gulim,Verdana,AppleGothic,sans-serif; }
+.wrap{text-align:center;}
+.con_menu, .con_content{position:relative; margin:0 auto; width:1000px; }
+.con_menu{cursor:pointer; height:200px;}
+.con_content{height:700px;}
+.front, .back{ position: absolute; top:0; left:0; width:200px; height:200px; background-repeat:no-repeat; }
+.box{-webkit-transform : translateZ(0); -o-transform : translateZ(0); -moz-transform : translateZ(0); transform : translateZ(0); position:relative; float:left; width:200px;height:200px;z-index:100; }
+.video{ position: absolute;left:9px; }
+.video1{top:65px; width:182px; height:120px;}
+.video2{top:65px; width:182px; height:120px;}
+.loading{background:url(img/loading.gif) no-repeat center 100px scroll; }
+.bg{background:url(img/back.gif) repeat center 0 scroll;}
+.load_img_list{display:none; width:0; height:0; visibility:hidden; }
+.btn{z-index:1000; width:200px; height:200px;}
+</style>
+<script>
+window.onload = function() {
+var isie6=(/msie 6/i).test(navigator.userAgent);
+var isie7=(/msie 7/i).test(navigator.userAgent);
+var isie8=(/msie 8/i).test(navigator.userAgent);
+var isie9=(/msie 9/i).test(navigator.userAgent);
+if(isie6 ||isie7 || isie8 || isie9){
+	var html_str="";
+	html_str+="<div style='margin-top:120px;'>본 사이트는 html5 css3로 만들어졌습니다.<br>그러므로 인터넷 익스플로러 6,7,8,9 에서는 실행이 불가능합니다.<br>"
+	html_str+="<a href='http://ie.microsoft.com/testdrive/Info/Downloads/'>인터넷 익스플로러10</a> 이나,"
+	html_str+="<a href='http://www.mozilla.or.kr/ko/'> 모질라 파이어폭스</a>, 혹은 "
+	html_str+="<a href='http://www.google.com/chrome/?hl=ko'>구글 크롬</a>"
+	html_str+="을<br>설치하여 재접속해주세요. 죄송합니다.</div>"
+	$(".wrap").css("display","block");
+	$(".wrap").html(html_str);
+}else{
+	$(".wrap").css("display","block");
+	$(".wrap").removeClass("loading");
+	$("body").addClass("bg");
+	$("#box7_front").html('<img style="margin-top:9px;" class="fun_img" src="img/ham.gif" alt=""/>');
+	init();
+}
+function init(){	
+CSSPlugin.defaultTransformPerspective = 1000;	
+var Box3Set = function( _class, _imgArr, imgWH, _isOverOut, _zoom){
+	var $this = this;
+	var className = ""; className = _class;
+	var dirArr = [];
+	var dirStrArr = ["left","right","top","bottom"];
+	var rotationSpeed = 0.5;
+	var isRotation = false;
+	var imgArr = []; imgArr = _imgArr;
+	var boxSize = imgWH;
+	var isOverOut = _isOverOut;
+	var zoom = _zoom
+	var menuActive = -1;
+	var menuActivePrv = -1;
+	var $menuActive;
+	var $menuActivePrv;
+	for(var i = 0; i < $(className).length; i++){
+		dirArr[i] = dirStrArr[Math.floor(Math.random()*4)];
+		$(className+">#box"+i+"_back").css("background-image","url("+imgArr[0]+")").css("background-position",((i%5)*-boxSize)+"px "+(Math.floor(i/5)*-boxSize)+"px");
+		setRotation(dirArr[i],i);	
+	}
+	$(className).stop().click(function(){
+		$(".fun_img").css("display","none");
+		if(isOverOut == true){
+			if(menuActivePrv != -1){
+				TweenLite.to($menuActivePrv, rotationSpeed, {z:0});
+			    moveRotation(dirArr[menuActivePrv],menuActivePrv,isRotation)
+			}
+			if( _class == ".menu"){
+				$menuActive = $(this);
+				$menuActivePrv = $menuActive;
+				menuActive = $(this).index();
+				menuActivePrv = menuActive;
+			}
+			$this.mouseDown($(this).index());
+		}
+	});
+
+	$(className).stop().mouseover(function($this){
+		if(isOverOut == true || className == ".menu"  ){
+			delayTime = true;
+			if(menuActive != $(this).index() && menuActive != -1){
+				TweenLite.to($menuActivePrv, rotationSpeed, {z:0});
+			    moveRotation(dirArr[menuActivePrv],menuActivePrv,isRotation)
+				
+				$(className).css("z-index","99");
+				$(this).css("z-index","100");
+				TweenLite.to($(this), rotationSpeed, {z:zoom});
+				moveRotation(dirArr[$(this).index()],$(this).index(),!isRotation)
+			}else{
+				$(className).css("z-index","99");
+				$(this).css("z-index","100");
+				TweenLite.to($(this), rotationSpeed, {z:zoom});
+				moveRotation(dirArr[$(this).index()],$(this).index(),!isRotation)
+			}
+		}
+	});
+	$(className).stop().mouseout(function(){
+		if(isOverOut == true || className == ".menu" ){
+			if(menuActive != -1){
+				$(className).css("z-index","99");
+			    $menuActive.css("z-index","100");
+				TweenLite.to($menuActive, rotationSpeed, {z:zoom});
+				moveRotation(dirArr[menuActive],menuActive,!isRotation)
+			}
+			if(menuActive != $(this).index()){
+				TweenLite.to($(this), rotationSpeed, {z:0});
+			    moveRotation(dirArr[$(this).index()],$(this).index(),isRotation)
+			}
+		}
+	});
+	
+	this.getBoxSize = function(){
+		return boxSize;
+	}
+	this.getImgArr = function(){
+		return imgArr;
+	}
+	this.getDirArr = function(){
+		return dirArr;
+	}
+	this.getClassName = function(){
+		return className;
+	}
+	this.getIsRotation = function(){
+		return isRotation;
+	}
+	this.getMoveRotation = function(){
+		return moveRotation;
+	}
+	this.getMenuActive = function(){
+		return menuActive;
+	}
+	this.setIsOverOut = function(arg){
+		isOverOut = arg
+	}
+	this.setIsRotation = function(arg){
+		isRotation = arg;
+	}
+	this.setMoveRotation = function(dir,index,isFront){
+		moveRotation(dir,index,isFront);
+	}
+	function setRotation(dir,index){
+		var boxFront = $(className+">"+"#box"+index+"_front")
+		var boxBack = $(className+">"+"#box"+index+"_back")
+		TweenLite.set([boxFront,boxBack], {transformOrigin:"left 100 -100"});
+		switch(dir){
+			case "left":
+				TweenLite.set(boxFront, {rotationY:90});
+				TweenLite.set(boxBack, {rotationY:0});
+				break;
+			case "right":
+				TweenLite.set(boxFront, {rotationY:-90});
+				TweenLite.set(boxBack, {rotationY:0});
+				break;
+			case "top":
+				TweenLite.set(boxFront, {rotationX:-90});
+				TweenLite.set(boxBack, {rotationX:0});
+				break;
+			case "bottom":
+				TweenLite.set(boxFront, {rotationX:90});
+				TweenLite.set(boxBack, {rotationX:0});
+				break;
+		}
+	}
+	var moveRotation = function(dir,index,isFront){
+		var boxFront = $(className+">"+"#box"+index+"_front")
+		var boxBack = $(className+">"+"#box"+index+"_back")
+		if(isFront === false){
+			boxFront.css("z-index",'99');
+			boxBack.css("z-index",'100');
+		}else{
+			boxFront.css("z-index",'100');
+			boxBack.css("z-index",'99');
+		}
+		switch(dir){
+			case "left":
+				if( isFront === false){
+					TweenLite.to(boxFront, rotationSpeed,{rotationY:90,onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed,{rotationY:0});
+				}else{
+					TweenLite.to(boxFront, rotationSpeed, {rotationY:0,tint:"0x000",onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed, {rotationY:-90});
+				}
+				break;
+			case "right":
+				if( isFront == false){
+					TweenLite.to(boxFront, rotationSpeed,{rotationY:-90,onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed,{rotationY:0});
+				}else{
+					TweenLite.to(boxFront, rotationSpeed, {rotationY:0,onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed, {rotationY:90});
+				}
+				break;
+			case "top":
+				if( isFront == false){
+					TweenLite.to(boxFront, rotationSpeed,{rotationX:-90,onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed,{rotationX:0});
+				}else{
+					TweenLite.to(boxFront, rotationSpeed, {rotationX:0,onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed, {rotationX:90});
+				}
+				break;
+			case "bottom":
+				if( isFront == false){
+					TweenLite.to(boxFront, rotationSpeed,{rotationX:90,onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed,{rotationX:0});
+				}else{
+					TweenLite.to(boxFront, rotationSpeed, {rotationX:0,onComplete:$this.motionComplete,onCompleteParams:[index]});
+					TweenLite.to(boxBack, rotationSpeed, {rotationX:-90});
+				}
+				break;
+		}
+	}
+}
+Box3Set.prototype.mouseDown = function(idx){
+	content.changeRotation(idx+1);
+	this.setIsOverOut(false);
+	content.setIsOverOut(false);
+}
+Box3Set.prototype.motionComplete = function(){
+}
+Box3Set.prototype.changeRotation = function(num){
+	if(this.getIsRotation() == true){ 
+		this.setIsRotation(false); 
+	}else if(this.getIsRotation() == false){
+		this.setIsRotation(true); 
+	}
+	for(var i = 0; i < $(this.getClassName()).length; i++){
+		if(this.getIsRotation() == true){ 
+			$(this.getClassName()+">#box"+i+"_front").css("background-image","url("+this.getImgArr()[num]+")").css("background-position",((i%5)*-this.getBoxSize())+"px "+(Math.floor(i/5)*-this.getBoxSize())+"px");
+		}else if(this.getIsRotation() == false){
+			$(this.getClassName()+">#box"+i+"_back").css("background-image","url("+this.getImgArr()[num]+")").css("background-position",((i%5)*-this.getBoxSize())+"px "+(Math.floor(i/5)*-this.getBoxSize())+"px");
+		}
+		TweenLite.delayedCall(i*0.05, this.setMoveRotation, [this.getDirArr()[i],i,this.getIsRotation()]);
+	}
+}
+var Box3SetPortPolio = function(arg){
+	Box3Set.apply(this, arguments);
+}
+var menuArr = [];
+menuArr.push("img/menu_over.gif");
+menuArr.push("img/menu_out.gif");
+var menu = new Box3Set(".menu", menuArr, 200, true, 0);
+menu.changeRotation(1);
+var contentArr = [];
+contentArr.push("img/bg.gif");
+contentArr.push("img/bg0.gif");
+contentArr.push("img/bg1.gif");
+contentArr.push("img/bg2.jpg");
+contentArr.push("img/bg3.jpg");
+contentArr.push("img/bg4.jpg");
+Box3SetPortPolio.prototype = new Box3Set();
+Box3SetPortPolio.prototype.constructor = Box3SetPortPolio;
+Box3SetPortPolio.prototype.mouseDown = function(idx){
+	console.log(idx);
+}
+Box3SetPortPolio.prototype.motionComplete = function(idx){
+	console.log(menu.getMenuActive() );
+	if($(content.getClassName()).length-1 == idx){
+		if(menu.getMenuActive() == 2 || menu.getMenuActive() == 3 || menu.getMenuActive() == 4){
+			menu.setIsOverOut(true);
+			content.setIsOverOut(true);
+		}else{
+			menu.setIsOverOut(true);
+			content.setIsOverOut(false);
+		}
+	}
+}
+Box3SetPortPolio.prototype.changeRotation = function(num){
+	Box3Set.prototype.changeRotation.call( this ,num );
+	
+	if(num == 5){
+		if(this.getIsRotation() == true){
+			$(".content>#box0_front").html('')
+			$(".content>#box1_front").html('') 
+			$(".content>#box0_back").html('<img class="video video1" src="img/vv1.gif"/>')
+			$(".content>#box1_back").html('<img class="video video1" src="img/vv2.gif"/>')
+		}else{
+			$(".content>#box0_front").html('<img class="video video1" src="img/vv1.gif"/>')
+			$(".content>#box1_front").html('<img class="video video1" src="img/vv2.gif"/>')
+			$(".content>#box0_back").html('')
+			$(".content>#box1_back").html('')
+		}
+		TweenLite.to($(".video"),0, {alpha:0});
+		TweenLite.to($(".video"),0, {alpha:1,delay:1});
+	}else{
+		TweenLite.to($(".video"), 0, {alpha:0});
+	}
+	if(num == 3 || num == 4 || num == 5){
+		var $this = this;
+		setTimeout(function(){
+			for(var i = 0; i < $($this.getClassName()).length; i++){
+				if($this.getIsRotation() == true){ 
+					$($this.getClassName()+">#box"+i+"_back").css("background-image","url(img/bg"+(num-1)+"_back.jpg)").css("background-position",((i%5)*-$this.getBoxSize())+"px "+(Math.floor(i/5)*-$this.getBoxSize())+"px");
+				}else if($this.getIsRotation() == false){
+					$($this.getClassName()+">#box"+i+"_front").css("background-image","url(img/bg"+(num-1)+"_back.jpg)").css("background-position",((i%5)*-$this.getBoxSize())+"px "+(Math.floor(i/5)*-$this.getBoxSize())+"px");
+				}
+			}
+		},500+$($this.getClassName()).length*50)
+	}else{
+		this.setIsOverOut(false);
+	}
+}
+var content = new Box3SetPortPolio(".content",contentArr, 200, false, 0);
+content.changeRotation(0);
+}
+}
+</script>
+</head>
+<body>
+<div class="load_img_list">
+<img src="img/back.gif"/>
+<img src="img/bg.gif"/>
+<img src="img/bg0.jpg"/>
+<img src="img/bg1.jpg"/>
+<img src="img/bg2.jpg"/>
+<img src="img/bg2_back.jpg"/>
+<img src="img/bg3.jpg"/>
+<img src="img/bg3_back.jpg"/>
+<img src="img/bg4.jpg"/>
+<img src="img/bg4_back.jpg"/>
+<img src="img/vv1.gif"/>
+<img src="img/vv2.gif"/>
+<img class="fun_img" src="img/ham.gif" alt=""/>
+</div>
+<div class="wrap loading">
+    <div class="con_menu">
+        <div class="menu box">
+            <div id="box0_front" class="front"></div>
+            <div id="box0_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="menu box">
+            <div id="box1_front" class="front"></div>
+            <div id="box1_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="menu box">
+            <div id="box2_front" class="front"></div>
+            <div id="box2_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="menu box">
+            <div id="box3_front" class="front"></div>
+            <div id="box3_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="menu box">
+            <div id="box4_front" class="front"></div>
+            <div id="box4_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+    </div>
+    <div class="con_content">
+        <div class="content box">
+            <div id="box0_front" class="front"></div>
+            <div id="box0_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box1_front" class="front"></div>
+            <div id="box1_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box2_front" class="front"></div>
+            <div id="box2_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box3_front" class="front"></div>
+            <div id="box3_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box4_front" class="front"></div>
+            <div id="box4_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box5_front" class="front"></div>
+            <div id="box5_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box6_front" class="front"></div>
+            <div id="box6_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box7_front" class="front"></div>
+            <div id="box7_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box8_front" class="front"></div>
+            <div id="box8_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box9_front" class="front"></div>
+            <div id="box9_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box10_front" class="front"></div>
+            <div id="box10_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box11_front" class="front"></div>
+            <div id="box11_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box12_front" class="front"></div>
+            <div id="box12_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box13_front" class="front"></div>
+            <div id="box13_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+        <div class="content box">
+            <div id="box14_front" class="front"></div>
+            <div id="box14_back" class="back"></div>
+            <div class="btn"><img src="img/btn.png" alt=""/></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+@charset "utf-8";
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0;word-wrap:break-word}
+body,input,textarea,select,button,table{font-size:1.2em;line-height:1.2em;}
+body{position:relative; background-color:#fff;color:#000; font-family:"돋움",Dotum,"굴림",Gulim,Verdana,AppleGothic,sans-serif; height: 100%;}
+img,fieldset{border:0}
+img{width:100%; vertical-align:top}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{color:inherit;text-decoration:none;}
+.clearfix:after {content: "";display: block;clear: both;}
+.ir{text-indent:-9999px;position:absolute;}
+.con{position:relative;}
+.loading{background:url(../img/loading.gif) no-repeat center 100px scroll; }
+/*gnb*/
+.wrap{overflow-x:hidden; width:100%; position:relative; display:none; margin:0 auto;}
+.header{position:relative; top:0; left:0; display:block; z-index:1000; width:100%;}
+.logo {position:absolute;   top:15.29%;   left:32.97%;   width:33.91%;}  
+.btn_left {position:absolute;   top:15.00%;   left:1.92%;   width:9.50%;}    
+.btn_tel {position:absolute;   top:15.00%;   left:80.00%;   width:17.83%;}    
+.gnb{box-shadow:0px 5px 5px #b2b2b2; z-index:1000;}
+.gnb li{float:left; width:25%;  z-index:1000;}
+.ui-loader{display:none;}
+.btn_top{position:fixed; bottom:5%; left:0%; width:10%; display:none;}
+
+.admin_login{border:1px #c3c3c3 solid; width:500px; width:500px; margin:150px auto 0 auto; color:#fff;}
+.admin_login h1{ background-color:#41c21f;  height:125px; position:relative; font-size:25px; color:#fff; padding:25px 0 0 25px;}
+.admin_login .txt{position:relative; top:75px;}
+.admin_login img{width:auto;}
+.admin_login .text_box{ border:none; font-size:16px; color:#000;}
+.con_login{height:205px; background-color:#fff; padding-top:25px;}
+.con_id{border:1px #c3c3c3 solid; background-color:#fff; width:400px; margin:0 auto 0 auto;}
+.con_pw{border:1px #c3c3c3 solid; background-color:#fff; width:400px; margin:10px auto 0 auto;}
+#admin_id{position:relative; top:12px; width:80%;}
+#admin_pw{position:relative; top:12px; width:80%;}
+.admin_login .btn{width:400px; display:block; position:relative; margin:20px auto 0 auto; text-align:center; padding:12px 0; background-color:#707070; color:#fff; font-size:25px;}
+.con_refer{border-top:1px #c3c3c3 dashed; height:120px; background-color:#f3f3f3; font-size:12px; color:#666666; line-height:1.2;}
+.con_refer h2{font-size:12px;padding:20px 0 0 20px;}
+.con_refer .refer_txt{padding:0 0 15px 20px;}
+.con_refer .title{font-weight:bold; padding:20px 0 0 20px;}
+.admin_sub img{width:auto;}
+.admin_sub{width:900px; margin:135px auto 0 auto;}
+.admin_sub table{ border:1px solid #c3c3c3; width:100%; border-collapse:collapse; }
+.admin_sub table th{ background-color:#f3f3f3;border:1px solid #c3c3c3; color:#666666; font-size:18px; padding:15px 0;}
+.admin_sub table td{border:1px solid #c3c3c3; padding:16px 5px; font-size:16px; background-color:#fff;}
+.admin_sub .text_box{ border:none; font-size:16px; width:85%;}
+.admin_sub textarea{resize:none;}
+.admin_sub .con_bull td{text-align:center;}
+.admin_sub .con_bull label{margin-left:5px;}
+
+.admin_sub #regi_no{margin-left:20px; }
+.admin_sub #high_regi_no{margin-left:20px;}
+.admin_sub .btn{width:200px; text-align:center; display:block; padding:12px 0; background-color:#707070; color:#fff; font-size:25px;  margin-top:20px; margin-bottom:80px;}
+.btn_preview{float:left;}
+.btn_save{margin-right:20px;float:right;}
+.btn_cancle{ float:right;}
+.left_con{display:none;}
+.product{left: 37%; position: absolute; top: 7.1%; width: 71%; z-index:2000;}
+.index{ margin:0 auto; position:relative;}
+.btn_product_info{position:absolute; top:98%; left:5%; width:90%; display:block;}
+.menstruation .wrapper { height: 100%;}
+.menstruation .panes { width: 81%;   position: relative; margin:0 auto;  }
+.menstruation .pane { width: 100%; position: absolute;  top: 18%;}
+.menstruation .panes.animate > .pane { transition: all .3s; -webkit-transition: all .3s; }
+.menstruation .footer_menu{ position:absolute; top:96%; width:100%; left:33%;}
+.menstruation .footer_menu li{width:2.5%; float:left; margin:0 1%;}
+.menstruation .btn_sub1_left{width:6%; position:absolute; top:50%; left:2%;}
+.menstruation .btn_sub1_right{width:6%; position:absolute; top:50%; right:2%;}
+
+.sns{background:url(../img/bg_snsP.png) repeat-y 0 0; background-size:100%;}
+.sns .btn_like{position:absolute;   top:78.43%;   left:5.33%;   width:25.42%;}
+.sns .con_snsbox li{ background:url(../img/bg_arow.png) no-repeat 5.3% center; background-size:5%; width:88%;  position:relative; left:3%; margin:5% 0; color:#4b4b4b; font-size:1em;} 
+.sns .con_snsbox .bg{width:88%; margin:0 auto; padding-top:6%;}
+.sns .con_snsbox .txt{ text-align:center;width:88%; margin:0 auto; padding:6% 0;}
+.sns .con_snsbox_in{border-radius:10px; background-color:#fff; box-shadow:#263d67 0 5px; width:95%; margin-left:10%;}
+.sns .btn_more{border-radius:10px; background-color:#fff; box-shadow:#263d67 0 5px; width:84%; margin-bottom:10%; display:block; padding:3% 0 3% 0; text-align:center; position:relative; left:11.5%;}
+.sns .btn_more img{width:26%; }
+.index_bg{ background-color:#f9efe1;}
+.sub_bg_men{ background:url(../img/bg_men.gif) repeat-y 0 0; background-size:100%;}
+.sub_bg{ background:url(../img/sub_bgP.gif) repeat-y 0 0; background-size:100%;}
+.hot .movie, .event {position:relative; width:91.6%; margin:0 auto 5% auto;}
+.hot .contents{ background-color:#000; width:100%; }
+.hot .title_txt{font-size:1.2em; color:#ffffff; background-color:#696969; padding:2% 0% 2% 2%;}
+.hot .movie .title_con_txt{font-size:0.8em; color:#666666;  background-color:#fff; border:2px #349400 solid; padding:1% 0% 1% 2%; box-shadow:#af9b79 0 3px;}
+.hot .event .title_con_txt{font-size:0.8em; color:#666666;  background-color:#fff; border:2px #cf6550 solid; padding:1% 0% 1% 2%; box-shadow:#af9b79 0 3px;}
+.hot .h3_title{position:relative;}
+.hot .hot_con{position:relative;}
+.hot .btn_plus{position:absolute; top:22.2%; right:2.2%; width:4.5%; display:block;}
+.btn_hot_close {position:absolute;   top:9.45%;   left:91.17%;   width:6.75%; display:block;}
+.btn_hot_more{width:91.6%; margin:5% auto 5% auto; display:block;}
+
+.btn_con{width:91.3%; margin:0 auto 5% auto;}
+.btn_movie{width:44%; float:left}
+.btn_event{width:44%; float:right}
+
+.pop_w{display:none; position:absolute;top:0; left:0; width:100%;z-index:3000;}

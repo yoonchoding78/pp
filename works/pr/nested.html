@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="msapplication-tap-highlight" content="no"/>
+<link rel="stylesheet" href="css/apps.css">
+<title></title>
+<style>
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+}
+
+    .wrapper {
+        height: 100%;
+    }
+    .panes {
+        width: 100%;
+        height: 1000px;
+        overflow: hidden;
+        position: relative;
+    }
+    .pane {
+        width: 100%;
+        position: absolute;
+        top: 0;
+		left: 0;
+    }
+
+    .panes.animate > .pane {
+        transition: all .3s;
+        -webkit-transition: all .3s;
+    }
+.wrap{position:relative;}
+.con{position:relative;}
+.btn_home {position:absolute;   top:6.74%;   left:84.53%;   width:11.41%;}    
+.btn_menu {position:absolute;   top:8.99%;   left:3.75%;   width:11.25%;}   
+
+.tab1 {position:absolute;   top:0.00%;   left:0.00%;   width:25.16%; height:100%;}    
+.tab2 {position:absolute;   top:0%;   left:24.69%;   width:25.16%; height:100%;}    
+.tab3 {position:absolute;   top:0.00%;   left:50.00%;   width:25.16%; height:100%;}    
+.tab4 {position:absolute;   top:00%;   left:74.69%;   width:25.16%; height:100%;} 
+.btn_left{ left: 2%; position: absolute; top: 46.5%; width: 8.63%;z-index:1001;}
+.btn_right{right: 2%; position: absolute; top: 46.5%; width: 8.63%;z-index:1000;}
+
+.btn_info {position:absolute;   top:0.00%;   left:41.41%;   width:17.03%;}  
+.footer_btn1 {position:absolute;   top:36.00%;   left:82.81%;   width:12.34%; display:none;}    
+.footer_btn2 {position:absolute;   top:46.00%;   left:82.81%;   width:12.34%; display:none;}    
+.footer_btn3 {position:absolute;   top:56.00%;   left:82.81%;   width:12.34%; display:none;}    
+.footer_btn4 {position:absolute;   top:66.00%;   left:82.81%;   width:12.34%; display:none;} 
+.footer_btn5 {position:absolute;   top:76.00%;   left:82.81%;   width:12.34%; display:none;} 
+.footer{position:absolute;   top:90%;   left:0%;   width:100%; height:10%; overflow:hidden; }
+
+
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<div class="bg_top con">
+<img src="img/bg_top.gif" alt="2014경제정책방향"/>
+	<a class="btn btn_menu" href="javascript:menu();"><img src="img/btn_menu.png" alt="메뉴"/></a>
+    <a class="btn btn_home" href="http://www.mosf.go.kr/main/main.jsp" target="_blank"><img src="img/btn_home.gif" alt="기획재정부로 가기"/></a>
+</div>
+<div class="tab con">
+<img class="btn_tab" src="img/tab11.gif" alt="탭메뉴"/>
+    <a class="btn tab1" href="javascript:tab_menu(1);"></a>
+    <a class="btn tab2" href="javascript:tab_menu(2);"></a>
+    <a class="btn tab3" href="javascript:tab_menu(3);"></a>
+    <a class="btn tab4" href="javascript:tab_menu(4);"></a>
+</div>
+
+
+<div class="panes wrapper">
+    <div class="bg11 pane ">
+       <img  src="img/con11.gif"/>
+    </div>
+    <div class="bg12 pane">
+	   <img  src="img/con12.gif"/>
+    </div>
+    <div class="bg13 pane">
+	   <img  src="img/con13.gif"/>
+    </div>
+    
+    
+    <div class="bg21 pane">
+	   <img  src="img/con21.gif"/>
+    </div>
+    <div class="bg22 pane">
+	   <img  src="img/con22.gif"/>
+    </div>
+    
+    
+    <div class="bg31 pane ">
+       <img  src="img/con31.gif"/>
+    </div>
+    <div class="bg32 pane">
+	   <img  src="img/con32.gif"/>
+    </div>
+    <div class="bg33 pane">
+	   <img  src="img/con33.gif"/>
+    </div>
+    
+    
+    <div class="bg41 pane ">
+       <img  src="img/con41.gif"/>
+    </div>
+    <div class="bg42 pane">
+	   <img  src="img/con42.gif"/>
+    </div>
+    <div class="bg43 pane">
+	   <img  src="img/con43.gif"/>
+    </div>
+</div>
+
+<a class="btn btn_left" href="javascript:move('left')"><img src="img/btn_left.png" alt="내용 왼쪽으로 이동"/></a>
+<a class="btn btn_right" href="javascript:move('right')"><img src="img/btn_right.png" alt="내용 오른쪽으로 이동"/></a>
+<div class="footer con">
+<div>
+<img src="img/footer_menu.png" alt=""/>
+    <a class="btn btn_info" href="javascript:pop_btn()"><img src="img/btn_info.png" alt="관련자료보기"/></a>
+    <ul>
+        <li class="footer_btn footer_btn1"><a href="#"><img src="img/btn_footer.png" alt="새 경제팀의 경제정책방향보기"/></a></li>
+        <li class="footer_btn footer_btn2"><a href="#"><img src="img/btn_footer.png" alt="[PDF] 새 경제팀의 경제정책방향 그래픽 자료보기"/></a></li>
+        <li class="footer_btn footer_btn3"><a href="#"><img src="img/btn_footer.png" alt="새 경제팀의 경제정책방향 참고자료"/></a></li>
+        <li class="footer_btn footer_btn4"><a href="#"><img src="img/btn_footer.png" alt="새 경제팀의 경제정책방향 10문 10답보기"/></a></li>
+        <li class="footer_btn footer_btn5"><a href="#"><img src="img/btn_footer.png" alt="[PDF] 경제정책방향 인포그래픽 자료보기"/></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/hammer.js"></script>
+<script>
+$(document).ready(function() {
+    resing();
+	outer.show(0,0,true)
+});
+$(window).load(function(){
+	resing();
+	outer.show(0,0,true)
+})
+$(window).resize(function(){
+	//outer = null;
+	//outer = new HammerCarousel(document.querySelector(".panes.wrapper"), Hammer.DIRECTION_HORIZONTAL);
+	resing();
+});
+
+
+
+var currentContents = 0;
+var outer;
+var containerSizeOut;
+var contentsArr=[];
+var pop_btn_open = false;
+
+contentsArr[0]=11;
+contentsArr[1]=12;
+contentsArr[2]=13;
+contentsArr[3]=21;
+contentsArr[4]=22;
+contentsArr[5]=31;
+contentsArr[6]=31;
+contentsArr[7]=33;
+contentsArr[8]=41;
+contentsArr[9]=42;
+contentsArr[10]=43;
+
+function tab_menu(num){
+	if(num==1){
+		tab_chage(0)
+		outer.show(0,0,true)
+	}else if(num==2){
+		tab_chage(3)
+		outer.show(3,0,true)
+	}else if(num==3){
+		tab_chage(5)
+		outer.show(5,0,true)
+	}else if(num==4){
+		tab_chage(8)
+		outer.show(8,0,true)
+	}
+}
+function pop_btn(){
+	if(pop_btn_open==false){
+		for(var i=0; i<$(".footer li").length; i++){
+			$(".footer_btn").css("display","block");
+			$(".footer").css("top","58%");
+			$(".footer").css("height","42%")
+		}
+		pop_btn_open = true;
+	}else{
+		for(var i=0; i<$(".footer li").length; i++){
+			$(".footer_btn").css("display","none");
+			$(".footer").css("top","90%")
+			$(".footer").css("height","10%")
+		}
+		pop_btn_open = false;
+	}
+}
+
+function resing(){
+	containerSizeOut= $('body').width();
+	$('.panes').css("height",(parseInt($('.panes').css("width"))*1.570625)); 
+	outer.show(currentContents,0,true)
+}
+function chinge_event(showIndex){
+	if(currentContents != showIndex){
+		console.log("내용바뀜");
+		tab_chage(showIndex)
+	};
+	currentContents = showIndex;
+}
+
+function move(dir){
+	//outer.show(0,0,true)
+	if(dir=="left"){
+		currentContents--
+	}else if(dir=="right"){
+		currentContents++
+	}
+	if( currentContents <=0){
+		currentContents = 0;
+	}else if(currentContents>=10){
+		currentContents = 10;
+	}
+	tab_chage(currentContents)
+	outer.show(currentContents,0,true)
+}
+function tab_chage(num){
+	$(".btn_tab").attr("src","img/tab"+contentsArr[num]+".gif");
+}
+
+
+
+var reqAnimationFrame = (function() {
+	return window[Hammer.prefixed(window, "requestAnimationFrame")] || function(callback) {
+		setTimeout(callback, 1000 / 60);
+	}
+})();
+
+function dirProp(direction, hProp, vProp) {
+	return (direction & Hammer.DIRECTION_HORIZONTAL) ? hProp : vProp
+}
+/**
+ * Carousel
+ * @param container
+ * @param direction
+ * @constructor
+ */
+var HammerCarousel = function(container, direction) {
+	this.container = container;
+	this.direction = direction;
+
+	this.panes = Array.prototype.slice.call(this.container.children, 0);
+	this.containerSize = this.container[dirProp(direction, 'offsetWidth')];
+  	
+	//this.containerSize = $('body').width();
+	this.currentIndex = 0;
+
+	this.hammer = new Hammer.Manager(this.container);
+	this.hammer.add(new Hammer.Pan({ direction: this.direction, threshold: 10 }));
+	this.hammer.on("panstart panmove panend pancancel", Hammer.bindFn(this.onPan, this));
+
+	this.show(this.currentIndex);
+}
+HammerCarousel.prototype = {
+	show: function(showIndex, percent, animate){
+		showIndex = Math.max(0, Math.min(showIndex, this.panes.length - 1));
+		
+		chinge_event(showIndex)
+		percent = percent || 0;
+
+		var className = this.container.className;
+		if(animate) {
+			if(className.indexOf('animate') === -1) {
+				this.container.className += ' animate';
+			}
+		} else {
+			if(className.indexOf('animate') !== -1) {
+				this.container.className = className.replace('animate', '').trim();
+			}
+		}
+
+		var paneIndex, pos, translate;
+		for (paneIndex = 0; paneIndex < this.panes.length; paneIndex++) {
+			pos = (containerSizeOut / 100) * (((paneIndex - showIndex) * 100) + percent);
+			if(this.direction & Hammer.DIRECTION_HORIZONTAL) {
+				translate = 'translate3d(' + pos + 'px, 0, 0)';
+			} else {
+				translate = 'translate3d(0, ' + pos + 'px, 0)'
+			}
+			 this.panes[paneIndex].style.transform = translate;
+			 this.panes[paneIndex].style.mozTransform = translate;
+			 this.panes[paneIndex].style.webkitTransform = translate;
+		}
+
+		this.currentIndex = showIndex;
+	},
+	onPan : function (ev) {
+		var delta = dirProp(this.direction, ev.deltaX, ev.deltaY);
+		var percent = (100 / containerSizeOut) * delta;
+		var animate = false;
+
+		if (ev.type == 'panend' || ev.type == 'pancancel') {
+			if (Math.abs(percent) > 20 && ev.type == 'panend') {
+				this.currentIndex += (percent < 0) ? 1 : -1;
+			}
+			percent = 0;
+			animate = true;
+		}
+		this.show(this.currentIndex, percent, animate);
+	}
+	
+};
+outer = new HammerCarousel(document.querySelector(".panes.wrapper"), Hammer.DIRECTION_HORIZONTAL);
+Hammer.each(document.querySelectorAll(".pane .panes"), function(container) {
+
+	var inner = new HammerCarousel(container, Hammer.DIRECTION_VERTICAL);
+
+	// only recognize the inner pan when the outer is failing.
+	// they both have a threshold of some px
+	outer.hammer.get('pan').requireFailure(inner.hammer.get('pan'));
+});
+</script>
+</body>
+</html>

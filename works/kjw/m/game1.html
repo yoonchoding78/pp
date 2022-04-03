@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function() {
+});
+$(window).load(function(){
+	//setStage2();
+});
+function start(){
+	$(".stage").css("top","12.50%");
+	setStage2();
+}
+var spacing;
+var clearArr=0;
+function setStage2(){
+	spacing = $(".bg_line").width()-$(".dot").width()
+	for(var i=0; i<$(".dot").length; i++){
+		$(".dot").eq(i).mousedown(function(){
+			cut($(this).index());
+		})
+		$(".dot"+(i+1)).css("left",(Math.random()*spacing)+"px" )
+		cutMove(false,$(".cut"+(i+1)));
+	}
+}
+function cut(num){
+	var rec1 = parseInt($(".dot"+(num+1)).css("left"))
+	var rec2 = parseInt($(".cut"+(num+1)).css("left"))
+	var rec1W = $(".dot"+(num+1)).width();
+	var rec2W = $(".cut"+(num+1)).width();
+	if( (rec1-rec2W) <= rec2 && (rec1+rec1W) >= rec2){
+		
+		$(".cut"+(num+1)).stop().stop().animate();
+		$(".cut"+(num+1)).css("z-index",100).css("left",$(".dot"+(num+1)).css("left"));
+		clearArr++;
+		if(clearArr>=4){
+			alert("임무완료")
+			location.href="after_game.html?code=1";
+		}
+	}else{
+		alert("실패");
+	}
+}
+function cutMove(isBack,cut){
+	$cut = cut;
+	if(isBack == false){moveNum = spacing}else{moveNum = 0}
+	$cut.animate({"left":moveNum},(Math.random()*1000)+1000,function(){
+		if(spacing == parseInt($(this).css("left"))){
+			cutMove(true,$(this))
+		}else{
+			cutMove(false,$(this))
+		}
+	});
+}
+</script>
+<style>
+body{color:#000; font-size:1.2em;}
+.stage{position:absolute; /*top:79px;*/ top:-100%;left:2.29%;   width:95.21%;}
+.game1{position:absolute;   top:12.47%;   left:24.29%;   width:50.77%;}
+.dot, .cut{position:absolute;}
+.dot1{top:11.41%; width:8.19%;}
+.dot2{top:32.21%; width:8.19%;}
+.dot3{top:53.69%; width:8.19%;}
+.dot4{top:74.83%; width:8.19%;}
+.cut1{top:10.74%; width:9.05%;}
+.cut2{top:32.21%; width:9.05%;}
+.cut3{top:53.36%; width:9.05%;}
+.cut4{top:74.83%; width:9.05%;}
+ .btn_game_start {position:absolute;   top:58.28%;   left:31.35%;   width:35.94%;} 
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+<img src="img/bg_game1.jpg" usemap="#Map"/>
+<a href="javascript:start()" class="btn_game_start"><img src="img/btn_game_start.png" alt="게임시작"></a>
+<div class="stage">
+    <img class="bg" src="img/bg_stage2.png"/>
+    <div class="game1">
+        <img class="bg_line" src="img/s2_bg_line.png"/>
+        <div>
+        	<img class="cut cut1" src="img/s2_cut1.png"/>
+            <img class="cut cut2" src="img/s2_cut2.png"/>
+            <img class="cut cut3" src="img/s2_cut3.png"/>
+            <img class="cut cut4" src="img/s2_cut4.png"/>
+         </div>
+        <div>
+            <a class="dot dot1"><img src="img/s2_dot_line.png"/></a>
+            <a class="dot dot2"><img src="img/s2_dot_line.png"/></a>
+            <a class="dot dot3"><img src="img/s2_dot_line.png"/></a>
+            <a class="dot dot4"><img src="img/s2_dot_line.png"/></a>
+         </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

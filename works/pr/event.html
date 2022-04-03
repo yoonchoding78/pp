@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<title>AIR CANADA</title>
+<link rel="stylesheet" type="text/css" href="css/apps.css">
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var preHeight;
+function popup_open(type){
+	preHeight = $("html").scrollTop();
+	$(".con_popup").css("display","block");
+	$(".popup_gift").css("display","none");
+	$(".popup_reservation").css("display","none");
+	$(".popup_input").css("display","none");
+	$("."+type).css("display","block");
+	$("html").animate({scrollTop:0},0);
+	$(".wrap").css("display","none");
+}
+function popup_close(){
+	$(".wrap").css("display","block");
+	$("html").animate({scrollTop:preHeight},0);
+	$(".con_popup").css("display","none");
+	$(".popup_gift").css("display","none");
+	$(".popup_reservation").css("display","none");
+	$(".popup_input").css("display","none");
+}
+//공통
+$(document).ready(function (){
+	//rolling_out();
+});
+//슬라이드 이미지
+var timeRid;
+var img_length=5;
+var img_current=0;
+function rolling_over(){
+	clearInterval(timeRid);
+}
+function rolling_out(){
+	timeRid = setInterval('call_setInterval()',3000);	
+}
+function call_setInterval(){
+	btn_click('left')
+}
+function btn_click(dir){
+	if(dir=="left"){
+		img_current++
+	}else if(dir=="right"){
+		img_current--
+	}
+	if(img_current<0){
+		$(".img_con>.con").css("left",-(img_length-1)*100+"%")
+		img_current = img_length-2;
+	}else if(img_current>=img_length){
+		$(".img_con>.con").css("left",0)
+		img_current = 1;
+	}
+	move_img(img_current)
+}
+function move_img(num){
+	$(".img_con>.con").stop().stop().animate({left:(-num*100)+"%"},"300");
+}
+</script>
+
+</head>
+<body>
+<div class="wrap">
+	<div class="content">
+    	<img src="img/bg_top.jpg"/>
+        <div class="up_html">
+            <h1><a class="logo_left"href="http://www.aircanada.co.kr" target="_blank" ><img src="img/logo_left.png" alt="2014 air canada"/></a></h1>
+            <a class="logo_right" href="http://www.aircanada.co.kr" target="_blank" ><img src="img/logo_right.png" alt="air canada"/></a>
+        </div>
+    </div>
+    <div class="content">
+    	<img src="img/bg_event1.jpg"/>
+        <div class="up_html event1">
+            <div class="img_con">
+                <div class="con">
+                    
+                    <span><a href="#" ><img alt="" src="img/img1.png"></a></span>
+                    <span><a href="#" ><img alt="" src="img/img2.png"></a></span>
+                    <span><a href="#" ><img alt="" src="img/img3.png"></a></span>
+                    <span><a href="#"><img alt="" src="img/img4.png"></a></span>
+                    <span><a href="#"><img alt="" src="img/img1.png"></a></span>
+                </div>
+            </div>
+            <a class="btn_left" href="javascript:btn_click('left')"><img src="img/btn_left.png" alt="이미지 왼쪽 이동"/></a>
+            <a class="btn_right" href="javascript:btn_click('right')"><img src="img/btn_right.png" alt="이미지 오른쪽 이동"/></a>
+            <a class="btn_class" href="#"><img src="img/btn_class.png" alt="비즈니스 클래스 예약 문의하기"/></a>
+            <a class="btn_rimugin" href="#"><img src="img/btn_rimugin.png" alt="리무진 서비스 자세히 보기"/></a>
+        </div>
+    </div>
+    <div class="content">
+    	<img src="img/bg_event2.jpg"/>
+        <div class="up_html event2">
+            <a class="btn_leaf" href="#"><img src="img/btn_leaf.png" alt="‘반반결합’이 자유로운 에어캐나다! 갈 때 비즈니스 클래스, 올 때 이코노미 클래스로 연중예약가능 지금 전화로 문의하세요."/></a>
+            <a class="btn_class" href="#"><img src="img/btn_class.png" alt="비즈니스 클래스 예약 문의하기"/></a>
+            <a class="btn_rimugin" href="#"><img src="img/btn_rimugin.png" alt="리무진 서비스 자세히 보기"/></a>
+        </div>
+    </div>
+    <div class="content">
+    	<img src="img/bg_event3.jpg"/>
+        <div class="up_html">
+            <a class="btn_share" href="javascript:popup_open('popup_input')"><img src="img/btn_share.png" alt="공유하기"/></a>
+        </div>
+    </div>
+</div>
+
+<div class="con_popup">    
+    <div class="bg_pop" style=" position:absolute;top:0; width:100%; height:100%; margin-top:0; margin-bottom:0;background-color:#000; opacity:0.7"></div>
+    
+    <div class="popup popup_gift" >
+        <img src="img/pop_gift.jpg" alt=""/>
+        <div class="reset_position">
+        	
+        	<a class="btn_aircanada ir_no"  href="http://www.aircanada.co.kr" target="_blank"><img src="img/aircanada.png" alt="에어캐나다"/></a>
+        	<a class="btn_close ir_no" href="javascript:popup_close()"><img src="img/btn_close.png" alt="뒤로 가기"/></a>
+        </div> 
+    </div>
+    
+    <div class="popup popup_reservation" >
+        <img src="img/pop_reservation.jpg" alt=""/>
+        <div class="reset_position">
+        	<ul>
+            	<li class="btn_tour1"><a href="http://www.onlinetour.co.kr/event/view.asp?idx=3175&_C_=23819" target="_blank"><img src="img/btn_tour1.png" alt="온라인투어"/></a></li>
+                <li class="btn_tour2"><a href="http://eventzone.tourexpress.com/eventlist/view.php?no=58927&type=W" target="_blank"><img src="img/btn_tour2.png" alt="SM C&C"/></a></li>
+                <li class="btn_tour3"><a href="http://www.webtour.com/AA/AA_Event_detail.asp?eIdx=136" target="_blank"><img src="img/btn_tour3.png" alt="웹투어"/></a></li>
+                <li class="btn_tour4"><a href="http://air.interpark.com/?mbn=tour_main&mln=tour_air" target="_blank"><img src="img/btn_tour4.png" alt="인터파크투어"/></a></li>
+                <li class="btn_tour5"><a href="http://www.whypaymore.co.kr/home/AirHotFare/CityHotFareView.asp?HF_idx=737" target="_blank"><img src="img/btn_tour5.png" alt="클럽로뎀"/></a></li>
+                <li class="btn_tour6"><a href="http://www.hanatour.com" target="_blank"><img src="img/btn_tour6.png" alt="하나투어"/></a></li>
+            </ul>
+        	<a class="btn_close ir_no" href="#"><img src="img/btn_close.png" alt="뒤로 가기"/></a>
+        </div>
+        
+    </div>
+    
+    
+    <div class="popup popup_input" >
+        <img src="img/pop_input.jpg" alt=""/>
+		<div class="reset_position">
+        	<h1 class="ir">MOS영상공유 이벤트 경품 지급을 위한 개인정보를 입력해 주세요!!</h1>
+            <label class="ir_no i name" style="display:block;"><input class="text_box" title="이름" type="text"></label>
+			<label class="ir_no i tel1"><input class="text_box" title="휴대폰 앞자리" type="text"></label>
+			<label class="ir_no i tel2"><input class="text_box" title="휴대폰 중간자리" type="text"></label>
+			<label class="ir_no i tel3"><input class="text_box" title="휴대폰 뒷자리" type="text"></label>
+            <label class="ir_no c chk"><div><input title="경품추첨을 위한 개인정보 취급방침에 동의합니다." type="checkbox"></div></label>
+            <div class="ir">
+                
+            <h2>[개인 정보 수집. 이용 동의]</h2>
+            <ul>
+            <li>1. 수집 및 이용하는 개인 정보 항목    
+                * 수집 항목 : 이름, 휴대 전화 번호, 이메일   
+                * 개인 정보 수집 방법 : 이벤트 응모 </li>
+            <li>2. 개인 정보의 수집 및 이용 목적    
+                * 이벤트 참여 목적   
+                * 본 이벤트는 만 19세 이하의 사람은 참여할 수 없습니다.
+                  (만 19세 미만의 참여자는 당청이 취소 될 수 있습니다)   
+                    - 개인 식별, 당첨자 선정과 안내, 경품 배송,
+                    - 뉴스레터 발송 분쟁 조정을 위한 기록 보존과 편의 사항 처리 등   
+                * 회사가 수집한 개인 정보는 명시한 목적 이외의 다른 어떤 용도로도 사용되지 않음 </li>
+            <li>3. 개인 정보의 보유 및 이용 기간 이벤트 종료 3개월 후까지 보유 후 파기</li>
+            </ul>
+            
+            <h2>[개인 정보 취급 위탁 안내]</h2>
+            
+            <p>에어캐나다는 원활한 개인 정보 업무 처리를 위하여 
+            다음과 같이 개인 정보 처리 업무를 위탁하고 있습니다. </p>
+            <ul>
+            <li>1. 개인 정보 취급 위탁을 받는 자 : ㈜ 유달리 커뮤니케이션즈</li>
+            <li>2. 개인 정보 취급 위탁을 하는 업무의 내용 :    
+               이벤트 대행을 통한 개인 정보 취급 및 경품 배송 안내</li> 
+            </ul>
+            <p>※ 귀하는 상기 동의를 거부 할 수 있습니다.다만, 이에 대한 
+               동의를 하지 않을 경우에는이벤트 참여가 불가능 함을 알려드립니다 .</p>
+            </div>
+            <ul>
+            	<li class="btn_fb"><a href="#"><img src="img/btn_fb.png" alt="페이스북"/></a></li>
+                <li class="btn_tw"><a href="#"><img src="img/btn_tw.png" alt="트위터"/></a></li>
+                <li class="btn_ca"><a href="#"><img src="img/btn_ca.png" alt="카카오톡"/></a></li>
+            </ul>
+     		<a class="btn btn_pop_close2" href="javascript:popup_close()"><img src="img/btn_close.png" alt="닫기"/></a>
+        </div>
+    </div>
+ 
+</div> 
+
+</body>
+</html>

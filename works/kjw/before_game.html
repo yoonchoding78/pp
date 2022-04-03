@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function(e) {
+	gNum = getLocationParameter('code');
+	$(".timer").css("top",timeArrY[gNum]).css("left",timeArrX[gNum])
+	$(".timer_lock").attr("src","img/timer"+gNum+"_lock.png")
+	$(".timer_pop_img").attr("src","img/timer"+gNum+".png")
+	$(".office_img").attr("src","img/office"+gNum+".png")
+	$(".office_txt").attr("src","img/office"+gNum+"_txt.png")
+	timerGif();
+	$(".timer_pop").css("top","10.67%");
+	$(".timer_pop").fadeTo(0,0);
+	$(".timer_pop").animate({"top":"22.67%","opacity":1},1000)
+});
+var gNum
+var isOver = false;
+var timeArrX = [];
+var timeArrY = [];
+timeArrX[1] = 109
+timeArrY[1] = 220
+timeArrX[2] = 230
+timeArrY[2] = 220
+timeArrX[3] = 109
+timeArrY[3] = 320
+timeArrX[4] = 230
+timeArrY[4] = 320
+function timerGif(){
+	var timer = $(".timer")
+	setInterval(function(){
+		if(isOver == false){
+			timer.attr("src","img/timer"+gNum+"_over.png")
+			isOver=true;
+		}else{
+			timer.attr("src","img/timer"+gNum+"_out.png")
+			isOver=false;
+		}
+	},500)
+}
+function go_mission(){
+	$(".office").css("top","10.67%");
+	$(".office").fadeTo(0,0);
+	$(".office").animate({"top":"19.60%","opacity":1},1000)
+	$(".con_timer").css("display","none")
+	$(".con_office").css("display","block")
+}
+function go_test(){
+	location.href="game"+gNum+".html";
+}
+</script>
+<style>
+body{ background-color:#e5e5e5}
+.wrap{position:relative; width:1024px; height:750px; margin:0 auto;}
+.con_timer{}
+.timer_lock{position:absolute;   top:29.20%;   left:10.64%;   }
+.timer{position:absolute;   top:29.20%;   left:10.55%;  }
+.timer_pop{position:absolute;   top:22.67%;   left:41.70%;   }
+.con_office{display:none;}
+.office {position:absolute;   top:19.60%;   left:22.66%;  }    
+.office_txt {position:absolute;   top:69.60%;   left:1.17%;  }
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+
+<div class="con_timer">
+    <img src="img/bg_timer.jpg">
+    <div>
+        <img class="timer_lock" src="img/timer_lock.png">
+    	<img class="timer" src="img/timer1_out.png">
+    </div>
+    <div class="timer_pop">
+    	<img class="timer_pop_img" src="img/timer.png" usemap="#Map2">
+        <map name="Map2">
+          <area shape="rect" coords="153,160,393,213" href="javascript:go_mission()" alt="임무수행하러가기">
+        </map>
+    </div>
+</div>
+<div class="con_office">
+	<img src="img/bg_office.jpg">
+    <div class="office">
+        <img class="office_img" src="img/office.png" usemap="#Map3" >
+        <map name="Map3">
+          <area shape="rect" coords="161,181,402,231" href="javascript:go_test()" alt="요원 테스트 시작하기">
+        </map>
+    </div>
+    <div>
+        <img class="office_txt" src="img/office_txt.png">
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<title>PORTFOLIO</title>
+<link href="css/apps.css" rel="stylesheet"/>
+<style>
+body{ background-color:#37444c}
+.wrap{ background:url(img/bg_game.png) center top repeat-x scroll; min-width:1023px;   height:800px; }
+.content{width:1023px; margin:0 auto; position:relative;}
+.logo{position:absolute; top:0px; left:3px;}
+.btn_quiz{position:absolute; top:7px; right:4px;}
+.btn_rank{position:absolute; top:303px; left:378px;}
+.btn_gamestart{position:absolute; top:303px; right:378px;}
+.pop{position:absolute;top:0;left:0; width:100%; display:none; }
+.pop .bg{position:absolute;top:0;left:0; width:100%; height:100%;background-color:#000;}
+.game_complete{width:630px; height:650px; background:url(img/pop_complete.png) no-repeat scroll; margin:0 auto; position:relative;}
+.game_input{width:630px; height:650px; background:url(img/pop_input_game.png) no-repeat scroll; margin:0 auto; position:relative;}
+.game_sns{width:630px; height:650px; background:url(img/pop_sns_game.png) no-repeat scroll; margin:0 auto; position:relative;}
+.btn_close{position:absolute; width:50px; height:50px; }
+.game_input .btn_close{top:30px; right:0px;}
+.game_complete .btn_close{top:33px; right:0px;}
+.game_sns .btn_close{top:33px; right:0px;}
+.btn_means{position:absolute; width:220px; height:62px;top:476px; left:314px;}
+.pop_con{margin-top:100px;}
+.ww{display:none;}
+.w0{position:absolute;top:673px; left:233px;}
+.w1{position:absolute;top:673px; left:301px;}
+.w2{position:absolute;top:673px; left:381px;}
+.w3{position:absolute;top:673px; left:449px;}
+.w4{position:absolute;top:673px; left:527px;}
+.w5{position:absolute;top:673px; left:594px;}
+.w6{position:absolute;top:673px; left:673px;}
+.w7{position:absolute;top:673px; left:741px;}
+.btn_click{position:absolute;top:430px; left:442px;}
+.game_title{position:absolute;top:24px; left:288px;}
+.stage{width:1023px; height:800px; position:relative;}
+.gam{position:absolute; display:none;}
+.rr{width:44px; height:62px; overflow:hidden; float:left; background:url(img/number1.png) no-repeat scroll; }
+.jum1{width:18px; height:62px; overflow:hidden; float:left; background:url(img/jum1.png) no-repeat scroll; }
+.timer{ float:left; position:relative; top:-19px; margin-right:18px;}
+.cho{ float:left;position:relative; top:16px;margin-left:5px;}
+.con_number{position:absolute; top:343px; left:345px; display:none;}
+.btn_re{ position:absolute; width:158px; height:56px;top:474px; left:118px;}
+.btn_com{position:absolute; width:158px; height:56px;top:474px; left:355px;}
+.rank_txt{ margin:0 auto; position:relative; top:268px;}
+.txt_wi{float:left;position:relative; top:36px;}
+.num{width:56px; height:84px; overflow:hidden; float:left; background:url(img/number2.png) no-repeat scroll; }
+.btn_confirm{position:absolute; width:157px; height:54px;top:544px; left:237px;}
+.chkLabel{position:absolute;top:510px; left:355px;}
+.averSpeed{ position:absolute;top:421px; left:343px; color:#b33138; font-size:24px;}
+.txt_box{border:none; background-color:transparent; font-size:20px; color:#000; padding:5px;}
+.name{ left: 181px;position: absolute; top: 257px;  width: 332px;}
+.tel1{ left: 181px;   position: absolute;  top: 298px;  width: 90px;}
+.tel2{ left: 301px;  position: absolute;   top: 298px;  width: 90px;}
+.tel3{ left: 422px;  position: absolute; top: 298px;  width: 90px;}
+.adr{left: 181px; position: absolute; top: 339px;  width: 332px;}
+.agree_box{ color: #000;  font-size: 12px;  height: 83px;left: 103px;   padding: 5px; position: absolute; top: 410px; width: 410px; overflow-x:hidden; overflow-y:auto;}
+.btn_fb{position:absolute; top:277px;left:199px; width:72px; height:72px;}
+.btn_tw{position:absolute; top:277px;left:359px; width:72px; height:72px;}
+.btn_popquiz{position:absolute; top:425px;left:110px; width:189px; height:55px;}
+.btn_end{position:absolute; top:425px;left:369px; width:158px; height:55px;}
+</style>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/input.js"></script>
+<script>
+$(document).ready(function() {
+	$(".pop>.bg").fadeTo(0,0.5);
+	resizePop();
+	game();
+var chk1 = new set_chk("chkLabel","chkInput");
+
+});
+$(window).resize(function(){
+	resizePop();
+});
+function resizePop(){
+	if($(document).width() <= 1023){
+		$(".pop>.bg").css("width","1023px");
+	}else{
+		$(".pop>.bg").css("width","100%");
+	}
+	if($(document).height() <= 800){
+		$(".pop>.bg").css("height","800px");
+	}else{
+		$(".pop>.bg").css("height",$(document).height());
+	}
+}
+function start(){
+	location.href="main.html";
+}
+function pop_complete(num){
+	$(".pop").css("display","block")
+	$(".game_input").css("display","none");
+	$(".game_complete").css("display","block");
+	$(".game_sns").css("display","none");
+	$(".averSpeed").text(num+'초');
+	rank('1');
+	
+	
+}
+function close(){
+	$(".pop").css("display","none")
+}
+///////////////game
+function game(){
+	var isClick = false;
+	var overNum =-1;
+	var scoreArr = [];
+	var startT;
+	var endT;
+	var isComplete = false;
+	var Tid;
+	$(".btn_click").mousedown(function(){
+		overNum++;
+		$(".w"+overNum).css("display","block");
+		if(isClick == false){
+			clearTimeout(Tid);
+			reStart();
+			$(".gam").stop();
+			scoreArr[overNum] = '3.000';
+			image_to_number(scoreArr[overNum])
+			alert("감이 떨어질때 클릭하세요")
+		}else if(isClick == true){
+			endT =  new Date().getTime();
+			$(".gam").stop();
+			scoreArr[overNum] = String((endT-startT)*0.001);
+			scoreArr[overNum] = scoreArr[overNum].substr(0,5)
+			if(scoreArr[overNum].length == 1){
+				scoreArr[overNum] = scoreArr[overNum]+".000"
+			}else if(scoreArr[overNum].length == 3){
+				scoreArr[overNum] = scoreArr[overNum]+"00"
+			}else if(scoreArr[overNum].length == 4){
+				scoreArr[overNum] = scoreArr[overNum]+"0"
+			}
+			image_to_number(scoreArr[overNum])
+			setTimeout(function(){$(".gam").attr("src","img/catch1.png");},50);
+			setTimeout(function(){$(".gam").attr("src","img/catch2.png");reStart();},100)
+			setTimeout(function(){$(".gam").css("display","none");},400)
+			isClick = false;
+		}
+		if(result() == true){	
+			gameOver();
+		}
+	})
+	function randomMove(){
+		if(isComplete == false){
+			var gW = $(".gam").width();
+			var gH = $(".gam").height();
+			var x = (Math.random()*(1023-gW))-gW;	
+			var y = (Math.random()*100)+100;
+			$(".gam").attr("src","img/gam1.png");
+			$(".gam").css({"top":y,"left":x});
+			startT = new Date().getTime();;
+			$(".gam").css("display","block");
+			$(".gam").animate({"top":"515px"},600,function(){
+					overNum++;
+					$(".w"+overNum).css("display","block");
+					isClick = false;
+					setTimeout(function(){$(".gam").attr("src","img/gam2.png");},50);
+					setTimeout(function(){$(".gam").attr("src","img/gam3.png");},100)
+					setTimeout(function(){$(".gam").css("display","none");
+						alert("감이 땅에 떨어지기전에 클릭하세요")
+					},200)
+					
+					scoreArr[overNum] = '3.000';
+					image_to_number(scoreArr[overNum])
+			
+					if(result() == true){
+						gameOver()
+					}else{
+						reStart();
+					}
+					
+			});
+			isClick = true;
+		}
+	}
+	function reStart(){
+		Tid = setTimeout(function(){
+			$(".gam").css("display","none");
+			randomMove();
+		},(Math.random()*3000)+1000);
+	
+	}
+	function result(){
+		if(overNum >=7){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function image_to_number(arr){
+		$(".con_number").css("display","block");
+		for(var i=0; i<arr.length; i++){
+			if(i != 1){
+				$(".r"+i).css("background-position","0px "+(-62*arr[i])+"px");
+			}
+		}
+		setTimeout(function(){$(".con_number").css("display","none");},1000);
+	}
+	function gameOver(){
+		
+		$(".btn_click").css("display","none");
+		$(".gam").stop();
+		clearTimeout(Tid);
+		isComplete = true;
+		var totalNum=0;
+		for(var i=0; i<scoreArr.length; i++){
+			totalNum += Number(scoreArr[i]);
+		}
+		//평균반응속도
+		pop_complete((totalNum/8).toFixed(3));
+		//alert((totalNum/8).toFixed(3));  
+ 	}
+	reStart();
+}
+/////////////////////////////////
+function rank(arr){
+	var strHtml="";
+	for(var i=0; i<arr.length; i++){
+		strHtml = strHtml+"<div class='num n"+i+"'></div>"	
+	}
+	strHtml = strHtml+"<div class='txt_wi'><img src='img/txt_wi.png'/></div>"	
+	$(".rank_txt").html(strHtml);
+	for(i=0; i<arr.length; i++){
+		$(".n"+i).css("background-position","0px "+(-84*arr[i])+"px");
+	}
+	$(".rank_txt").css("width",(arr.length)*56+39);
+}
+function restart(){
+	location.href="main.html"
+}
+function com(){
+	$(".pop").css("display","block")
+	$(".game_input").css("display","block");
+	$(".game_complete").css("display","none");
+	$(".game_sns").css("display","none");
+}
+function confirms(){
+	$(".game_input").css("display","none");
+	$(".game_complete").css("display","none");
+	$(".game_sns").css("display","block");
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<div class="content">
+        <div class="stage">
+        	<img class="gam" src="img/gam1.png"/>
+        </div>
+        <h1><a class="btn logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_quiz" href="game_word.html"><img src="img/btn_quiz.png" alt="낱말퀴즈 이벤트GO"/></a>
+        <a class="game_title" href="index.html"><img src="img/game_title.png" alt="2015추석, 고향가는 길 이벤트 감잡으러 가는 길"/></a>
+        <a class="btn btn_click"><img src="img/btn_click.png" alt="Click"/></a>
+        <div class="con_number">
+        	<div class="timer"><img src="img/timer.png"/></div>
+            <div class="rr r0"></div> <div class="jum1 r1"></div> <div class="rr r2"></div> <div class="rr r3"></div> <div class="rr r4"></div>
+            <div class="cho"><img src="img/cho.png"/></div>
+        </div>
+        <ul class="con_word">
+            <li class="ww w0"><img src="img/word1.png"/></li>
+            <li class="ww w1"><img src="img/word2.png"/></li>
+            <li class="ww w2"><img src="img/word3.png"/></li>
+            <li class="ww w3"><img src="img/word4.png"/></li>
+            <li class="ww w4"><img src="img/word5.png"/></li>
+            <li class="ww w5"><img src="img/word6.png"/></li>
+            <li class="ww w6"><img src="img/word7.png"/></li>
+            <li class="ww w7"><img src="img/word8.png"/></li>
+    	</ul>
+    </div>
+</div>
+<div class="pop">
+	<div class="bg"></div>
+    
+	<div class="pop_con game_complete">
+    	<a class="btn btn_close" href="javascript:close()"><span class="ir">닫기</span></a>
+        <a class="btn btn_re" href="javascript:restart()"><span class="ir">다시하기</span></a>
+        <a class="btn btn_com" href="javascript:com()"><span class="ir">완료</span></a>
+        <div class="rank_txt">
+        	<div class="rank1"></div>
+        </div>
+        <div class="averSpeed"></div>
+    </div>
+    <div class="pop_con game_input">  	
+        <a class="btn btn_close" href="javascript:close()"><span class="ir">닫기</span></a>
+        <input type="text" class="txt_box name" title="이름"/>
+        <input type="text" class="txt_box tel1" title="전화번호 앞자리"/>
+        <input type="text" class="txt_box tel2" title="전화번호 중간자리"/>
+        <input type="text" class="txt_box tel3" title="전화번호 뒷자리"/>
+        <input type="text" class="txt_box adr" title="주소"/>
+        <div class="agree_box">
+        	개인정보취급방침
+        </div>
+        <input type="checkbox" id="chk" class="chkInput" />
+        <label for="chk" class="chkLabel chk"><img src="img/chk_off.png" alt=""/></label>
+        <a class="btn btn_confirm" href="javascript:confirms()"><span class="ir">확인</span></a>
+    </div>
+    <div class="pop_con game_sns">
+    	<a class="btn btn_close" href="javascript:close()"><span class="ir">닫기</span></a>
+        <a class="btn btn_fb" href="javascript:()"><span class="ir">페이스북</span></a>
+        <a class="btn btn_tw" href="javascript:()"><span class="ir">트위터</span></a>
+        <a class="btn btn_popquiz" href="javascript:()"><span class="ir">퀴즈 이벤트로 가기</span></a>
+        <a class="btn btn_end" href="javascript:()"><span class="ir">종료</span></a>
+    </div>
+</div>
+</body>
+</html>

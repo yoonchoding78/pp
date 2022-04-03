@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function() {
+});
+$(window).load(function(){
+	//setStage3();
+})
+function start(){
+	$(".stage").css("top","79px");
+	setStage3();
+}
+isStart = false;
+isS3Active=true;
+s3overNum=1;
+function setStage3(){
+	$(".con_bg_stage3").css("width",$(".con_bg_stage3").width()+$(".s3_shine").width())
+	$(".bg_stage3").css("right",$(".s3_shine").width())
+	$(".s3_shine").css("left",-($(".s3_shine").width()));
+	$(".s3_shine").animate({"left":$(".stage").width()},3000);
+	$(".con_bg_stage3").animate({"width":0,"left":$(".stage").width()+$(".s3_shine").width()},3000,function(){
+		game3();
+	});
+}
+function game3(){
+	$(".bg_stage3f").fadeIn("100",function(){
+		isStart = true;	
+	});
+	$(".s3_obj1").css("display","block")
+}
+function s3_left(){
+	if(isStart ==true){
+	if(isS3Active == true){
+	$(".con_s3_obj"+s3overNum).animate({"left":"-100%"},1000,function(){
+		$(this).css("left","100%");
+		isS3Active = true
+		
+	});
+	s3overNum++;
+	if(s3overNum>=5){
+		s3overNum=1;
+	}
+	$(".con_s3_obj"+s3overNum).animate({"left":"0%"},1000);
+	}
+	isS3Active = false;
+	}
+}
+function s3_right(){
+	if(isStart ==true){
+	if(isS3Active == true){
+	$(".con_s3_obj"+s3overNum).animate({"left":"100%"},1000,function(){
+		//$(this).css("left","100%")
+		isS3Active = true
+	});
+	s3overNum--;
+	if(s3overNum<=0){
+		s3overNum=4;
+	}
+	$(".con_s3_obj"+s3overNum).css("left","-100%")
+	$(".con_s3_obj"+s3overNum).animate({"left":"0%"},1000);
+	}
+	isS3Active = false;
+	}
+}
+function s3(){
+	alert("게임클리어")
+	location.href="after_game.html?code=2";
+}
+</script>
+<style>
+body{color:#000; font-size:1.2em;}
+.stage{position:absolute; /*top:79px;*/ top:-100%;left:22px; width:980px; height:430px;overflow:hidden;}
+.bg_stage3{position:absolute; top:0; right:0;}
+.s3_shine{position:absolute; top:0; left:0;}
+.con_bg_stage3{position:absolute; top:0; left:0; width:100%; height:100%;overflow:hidden;}
+.bg_stage3f{display:none;position:absolute; top:0; left:0;}
+.s3_left{position:absolute; top:183px; left:215px;}
+.s3_right{position:absolute; top:183px; left:715px;}
+.con_s3_obj1{position:absolute; top:0; left:0; width:100%;}
+.con_s3_obj2{position:absolute; top:0; left:100%; width:100%;}
+.con_s3_obj3{position:absolute; top:0; left:100%; width:100%;}
+.con_s3_obj4{position:absolute; top:0; left:100%; width:100%;}
+.s3_obj1{position:relative;width:43%;  top:12px; left:5px; margin:0 auto;display:none;}
+.s3_obj2{position:relative;width:39%;  top:0; margin:0 auto; display:block;}
+.s3_obj3{position:relative;width:43%;  top:0; margin:0 auto; display:block;}
+.s3_obj4{position:relative;width:43%;  top:0; margin:0 auto; display:block;}
+.s3_obj{position:absolute; top:236px; left:539px; display:block;}
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+<img src="img/bg_game2.jpg" usemap="#Map"/>
+<map name="Map">
+  <area shape="rect" coords="374,418,653,476" href="javascript:start()" alt="게임시작">
+</map>
+
+
+<div class="stage stage3">
+<img class="bg_stage3b" src="img/bg_stage3b.png"/>
+<div class="con_bg_stage3"><img class="bg_stage3" src="img/bg_stage3.png"/></div>
+<img class="s3_shine" src="img/s3_shine.png"/>
+<img class="bg_stage3f" src="img/bg_stage3f.png"/>
+
+<div>
+<div class="con_s3_obj1"><img class="s3_obj1" src="img/s3_obj1.png"/></div>
+<div class="con_s3_obj2"><img class="s3_obj2" src="img/s3_obj2.png"/></div>
+<div class="con_s3_obj3"><img class="s3_obj3" src="img/s3_obj3.png"/></div>
+<div class="con_s3_obj4"><img class="s3_obj4" src="img/s3_obj4.png"/>
+<a onclick="s3();" class="s3_obj"><img src="img/s3_obj.png"/></a>
+</div>
+</div>
+
+
+<a class="s3_left" href="javascript:s3_left()"><img class="" src="img/s3_btn_left.png"/></a>
+<a class="s3_right" href="javascript:s3_right()"><img class="" src="img/s3_btn_right.png"/></a>
+</div>
+</div>
+</body>
+</html>

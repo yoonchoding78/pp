@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="msapplication-tap-highlight" content="no"/>
+<link rel="stylesheet" href="css/apps.css">
+<title>문화체육관광부::지금 만나러 갑니다</title>
+</head>
+<style>
+
+ 
+</style>
+<body class="loading">
+<div class="wrap">
+<div class="panes wrapper">
+    <div class="bg11 pane ">
+       <img  src="img/bg_sub1.gif"/>
+  
+    </div>
+    <div class="bg12 pane">
+	   <img  src="img/bg_sub1.gif"/>
+ 
+    </div>
+    <div class="bg13 pane">
+	   <img  src="img/bg_sub1.gif"/>
+   
+    </div>
+
+</div>
+</div>
+
+
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/hammer.js"></script>
+<script>
+var arrFL = []
+var arrFR = []
+var fSpeed = 500;
+$(document).ready(function() {
+    resing();
+	outer.show(0,0,true)
+});
+
+
+function fMove(num){
+	$('.fL,.fR').stop();
+	$('.f'+num+'L').animate({top:arrFR[num]},fSpeed,function(){fMove1(num)});
+	$('.f'+num+'R').animate({top:arrFL[num]},fSpeed);
+}
+
+function fMove1(num){
+	$('.f'+num+'L').animate({top:arrFL[num]},fSpeed,function(){fMove2(num)});
+	$('.f'+num+'R').animate({top:arrFR[num]},fSpeed);
+}
+function fMove2(num){
+	$('.f'+num+'L').animate({top:arrFR[num]},fSpeed,function(){fMove1(num)});
+	$('.f'+num+'R').animate({top:arrFL[num]},fSpeed);
+}
+
+
+
+
+$(window).load(function(){
+	//$(".wrap").css("display","block");
+	//$("body").removeClass("loading");
+
+	resing();
+	outer.show(0,0,true)
+
+})
+$(window).resize(function(){
+	//outer = null;
+	//outer = new HammerCarousel(document.querySelector(".panes.wrapper"), Hammer.DIRECTION_HORIZONTAL);
+	resing();
+});
+
+var currentContents = 0;
+var outer;
+var containerSizeOut;
+var contentsArr=[];
+var pop_btn_open = false;
+
+contentsArr[0]=11;
+contentsArr[1]=12;
+contentsArr[2]=13;
+contentsArr[3]=21;
+contentsArr[4]=22;
+contentsArr[5]=31;
+contentsArr[6]=32;
+contentsArr[7]=33;
+contentsArr[8]=41;
+contentsArr[9]=42;
+contentsArr[10]=43;
+
+function pop_test_open(){
+	//$(".wrap").css("display","none");
+	$(".pop_test").css("display","block");
+}
+function pop_test_close(){
+	//$(".wrap").css("display","block");
+	$(".pop_test").css("display","none");
+}
+function tab_menu(num){
+	if(num==1){
+		tab_chage(0)
+		outer.show(0,0,true)
+	}else if(num==2){
+		tab_chage(3)
+		outer.show(3,0,true)
+	}else if(num==3){
+		tab_chage(5)
+		outer.show(5,0,true)
+	}else if(num==4){
+		tab_chage(8)
+		outer.show(8,0,true)
+	}
+}
+function pop_btn(){
+	if(pop_btn_open==false){
+		for(var i=0; i<$(".footer li").length; i++){
+			$(".footer_btn").css("display","block");
+			$(".footer").css("top","58%");
+			$(".footer").css("height","42%")
+		}
+		pop_btn_open = true;
+	}else{
+		for(var i=0; i<$(".footer li").length; i++){
+			$(".footer_btn").css("display","none");
+			$(".footer").css("top","90%")
+			$(".footer").css("height","10%")
+		}
+		pop_btn_open = false;
+	}
+}
+function resing(){
+	containerSizeOut= $('body').width();
+	$('.panes').css("height",(parseInt($('.panes').css("width"))*1.550625)); 
+	outer.show(currentContents,0,true)
+}
+function chinge_event(showIndex){
+	if(currentContents != showIndex){
+		console.log("내용바뀜");
+		tab_chage(showIndex)
+	};
+	currentContents = showIndex;
+}
+function move(dir){
+	if(dir=="right"){
+		currentContents--
+	}else if(dir=="left"){
+		currentContents++
+	}
+	if( currentContents <=0){
+		currentContents = 0;
+	}else if(currentContents>=10){
+		currentContents = 10;
+	}
+	tab_chage(currentContents)
+	outer.show(currentContents,0,true)
+}
+var arrTitImgOverNum = [];
+
+arrTitImgOverNum[1] = 0;
+arrTitImgOverNum[2] = 1;
+arrTitImgOverNum[3] = 1;
+arrTitImgOverNum[4] = 1;
+arrTitImgOverNum[5] = 2;
+arrTitImgOverNum[6] = 2;
+arrTitImgOverNum[7] = 3;
+arrTitImgOverNum[8] = 4;
+arrTitImgOverNum[9] = 5;
+arrTitImgOverNum[10] = 6;
+function tab_chage(num){
+	num++;
+	if(num==1){
+		$(".btn_left").css("display","block")
+		$(".btn_right").css("display","none")
+	}else if(num==10){
+		$(".btn_left").css("display","none")
+		$(".btn_right").css("display","block")
+	}else{
+		$(".btn_left").css("display","block")
+		$(".btn_right").css("display","block")
+	}
+
+	
+	fMove(num)
+	mainTitleActive(num);
+	$(".navi>img").attr("src","img/navi_off.png");
+	$(".navi"+num+">img").attr("src","img/navi_on.png");
+}
+function mainTitleActive(num){
+	if(num>=1 && num<=10){
+		for(i=0; i<=5; i++){
+			if(arrTitImgOverNum[num]<=i){
+				$(".k"+(i+1)).css("display","none");
+			
+			}else{
+				$(".k"+(i+1)).css("display","block");
+			}
+		}
+	}
+}
+
+var reqAnimationFrame = (function() {
+	return window[Hammer.prefixed(window, "requestAnimationFrame")] || function(callback) {
+		setTimeout(callback, 1000 / 60);
+	}
+})();
+function dirProp(direction, hProp, vProp) {
+	return (direction & Hammer.DIRECTION_HORIZONTAL) ? hProp : vProp
+}
+var HammerCarousel = function(container, direction) {
+	this.container = container;
+	this.direction = direction;
+
+	this.panes = Array.prototype.slice.call(this.container.children, 0);
+	this.containerSize = this.container[dirProp(direction, 'offsetWidth')];
+  	
+	//this.containerSize = $('body').width();
+	this.currentIndex = 0;
+
+	this.hammer = new Hammer.Manager(this.container);
+	this.hammer.add(new Hammer.Pan({ direction: this.direction, threshold: 10 }));
+	this.hammer.on("panstart panmove panend pancancel", Hammer.bindFn(this.onPan, this));
+
+	this.show(this.currentIndex);
+}
+HammerCarousel.prototype = {
+	show: function(showIndex, percent, animate){
+		showIndex = Math.max(0, Math.min(showIndex, this.panes.length - 1));
+		
+		chinge_event(showIndex)
+		percent = percent || 0;
+
+		var className = this.container.className;
+		if(animate) {
+			if(className.indexOf('animate') === -1) {
+				this.container.className += ' animate';
+			}
+		} else {
+			if(className.indexOf('animate') !== -1) {
+				this.container.className = className.replace('animate', '').trim();
+			}
+		}
+
+		var paneIndex, pos, translate;
+		for (paneIndex = 0; paneIndex < this.panes.length; paneIndex++) {
+			pos = (containerSizeOut / 100) * (((paneIndex - showIndex) * 100) + percent);
+			if(this.direction & Hammer.DIRECTION_HORIZONTAL) {
+				translate = 'translate3d(' + pos + 'px, 0, 0)';
+			} else {
+				translate = 'translate3d(0, ' + pos + 'px, 0)'
+			}
+			 this.panes[paneIndex].style.transform = translate;
+			 this.panes[paneIndex].style.mozTransform = translate;
+			 this.panes[paneIndex].style.webkitTransform = translate;
+		}
+
+		this.currentIndex = showIndex;
+	},
+	onPan : function (ev) {
+		var delta = dirProp(this.direction, ev.deltaX, ev.deltaY);
+		var percent = (100 / containerSizeOut) * delta;
+		var animate = false;
+
+		if (ev.type == 'panend' || ev.type == 'pancancel') {
+			if (Math.abs(percent) > 20 && ev.type == 'panend') {
+				this.currentIndex += (percent < 0) ? 1 : -1;
+			}
+			percent = 0;
+			animate = true;
+		}
+		this.show(this.currentIndex, percent, animate);
+	}
+	
+};
+outer = new HammerCarousel(document.querySelector(".panes.wrapper"), Hammer.DIRECTION_HORIZONTAL);
+Hammer.each(document.querySelectorAll(".pane .panes"), function(container) {
+	var inner = new HammerCarousel(container, Hammer.DIRECTION_VERTICAL);
+	outer.hammer.get('pan').requireFailure(inner.hammer.get('pan'));
+});
+</script>
+</body>
+</html>

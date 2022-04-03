@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<title>PORTFOLIO</title>
+<link href="css/apps.css" rel="stylesheet"/>
+<style>
+body{ background-color:#37444c}
+</style>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/input.js"></script>
+<script>
+$(document).ready(function() {
+	init();
+	game();
+	responseScaleFontSize()
+});
+$(window).resize(function(){
+	init();
+	responseScaleFontSize()
+});
+
+function init(){
+	var ww = $(window).width();
+	var wh = $(window).height();
+	if(760/1333 < ww/wh){
+		$(".wrap").css("margin","0 auto").css("width",(wh*760/1333)+"px");
+	}
+}
+///////////////game
+function game(){
+	$("body").css("background-color","#37444c");
+	var isClick = false;
+	var overNum =-1;
+	var scoreArr = [];
+	var startT;
+	var endT;
+	var isComplete = false;
+	var Tid;
+	$(".btn_click").bind('touchstart', function(e) {
+		overNum++;
+		$(".w"+overNum).css("display","block");
+		if(isClick == false){
+			clearTimeout(Tid);
+			reStart();
+			$(".gam").stop();
+			scoreArr[overNum] = '3.000';
+			image_to_number(scoreArr[overNum])
+			alert("감이 떨어질때 클릭하세요")
+		}else if(isClick == true){
+			endT =  new Date().getTime();
+			$(".gam").stop();
+			scoreArr[overNum] = String((endT-startT)*0.001);
+			scoreArr[overNum] = scoreArr[overNum].substr(0,5)
+			if(scoreArr[overNum].length == 1){
+				scoreArr[overNum] = scoreArr[overNum]+".000"
+			}else if(scoreArr[overNum].length == 3){
+				scoreArr[overNum] = scoreArr[overNum]+"00"
+			}else if(scoreArr[overNum].length == 4){
+				scoreArr[overNum] = scoreArr[overNum]+"0"
+			}
+			image_to_number(scoreArr[overNum])
+			setTimeout(function(){$(".gam").attr("src","img/catch1.png");},50);
+			setTimeout(function(){$(".gam").attr("src","img/catch2.png");reStart();},100)
+			setTimeout(function(){$(".gam").css("display","none");},400)
+			isClick = false;
+		}
+		if(result() == true){	
+			gameOver();
+		}
+	})
+	function randomMove(){
+		if(isComplete == false){
+			var gW = $(".gam").width();
+			var gH = $(".gam").height();
+			var x = ((Math.random()*$(".wrap").width())-gW);	
+			if(x<0){
+				x = 0;
+			}
+			var y = (Math.random()*8)+5;
+			$(".gam").attr("src","img/gam1.png");
+			$(".gam").css({"top":y+"%","left":x});
+			startT = new Date().getTime();;
+			$(".gam").css("display","block");
+			$(".gam").animate({"top":"70%"},700,function(){
+					overNum++;
+					$(".w"+overNum).css("display","block");
+					isClick = false;
+					setTimeout(function(){$(".gam").attr("src","img/gam2.png");},50);
+					setTimeout(function(){$(".gam").attr("src","img/gam3.png");},100)
+					setTimeout(function(){$(".gam").css("display","none");
+						alert("감이 땅에 떨어지기전에 클릭하세요")
+					},200)
+					
+					scoreArr[overNum] = '3.000';
+					image_to_number(scoreArr[overNum])
+			
+					if(result() == true){
+						gameOver()
+					}else{
+						reStart();
+					}
+					
+			});
+			isClick = true;
+		}
+	}
+	function reStart(){
+		Tid = setTimeout(function(){
+			$(".gam").css("display","none");
+			randomMove();
+		},(Math.random()*3000)+1000);
+	}
+	function result(){
+		if(overNum >=7){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function image_to_number(arr){
+		$(".con_number").css("display","block");
+		for(var i=0; i<arr.length; i++){
+			if(i != 1){
+				$(".r"+i).html("<img src='img/font/1/"+arr[i]+".png'/>");
+			}
+		}
+		setTimeout(function(){$(".con_number").css("display","none");},1000);
+	}
+	function gameOver(){
+		$(".btn_click").css("display","none");
+		$(".gam").stop();
+		clearTimeout(Tid);
+		isComplete = true;
+		var totalNum=0;
+		for(var i=0; i<scoreArr.length; i++){
+			totalNum += Number(scoreArr[i]);
+		}
+		//평균반응속도
+		pop_complete((totalNum/8).toFixed(3));
+		//alert((totalNum/8).toFixed(3));  
+ 	}
+	reStart();
+}
+/////////////////////////////////
+function rank(arr){
+	var strHtml="";
+	for(var i=0; i<arr.length; i++){
+		strHtml = strHtml+"<div class='num n"+i+"'></div>"	
+	}
+	strHtml = strHtml+"<div class='txt_wi'><img src='img/txt_wi.png'/></div>"	
+	$(".rank_txt").html(strHtml);
+	for(i=0; i<arr.length; i++){
+		$(".n"+i).html("<img src='img/font/2/"+arr[i]+".png'/>");
+	}
+	$(".rank_txt").css("left",Math.abs((((arr.length)*10+8)-100)/2)+"%");
+}
+function pop_complete(num){
+	$("body").css("background-color","#dc8955");
+	$(".game").css("display","none")
+	$(".pop").css("display","block")
+	$(".game_input").css("display","none");
+	$(".game_sns").css("display","none");
+	$(".game_complete").css("display","block");
+	$(".averSpeed").text(num+'초');
+	rank('1');
+}
+function com(){
+	$("body").css("background-color","#dc8955");
+	var chk1 = new set_chk("chkLabel","chkInput");
+	$(".game").css("display","none")
+	$(".pop").css("display","block")
+	$(".game_input").css("display","block");
+	$(".game_complete").css("display","none");
+	$(".game_sns").css("display","none");
+}
+function confirms(){
+	$("body").css("background-color","#dc8955");
+	$(".game").css("display","none")
+	$(".pop").css("display","block")
+	$(".game_input").css("display","none");
+	$(".game_complete").css("display","none");
+	$(".game_sns").css("display","block");
+}
+function responseScaleFontSize(){
+	var fontSize = $(window).width()*0.0019;
+	if(fontSize < 0.9){
+		fontSize = 0.9;
+	}else if(fontSize > 1.3){
+		fontSize = 1.3;
+	}
+	$('html, body').css("font-size",fontSize+"em");
+}
+</script>
+<style>
+.wrap{position:relative; width:100%;}
+.btn_close {position:absolute;   top:0.53%;   left:90.00%;   width:8.42%;}    
+.btn_logo {position:absolute;   top:0.00%;   left:2.76%;   width:21.97%;} 
+.gam{position:absolute; width:20%; display:none;}
+ .timer {position:absolute;   top:40.29%;   left:22.63%;   width:14.74%;}   
+.rr{ width:7.37%;}
+.r0 {position:absolute;   top:42.24%;   left:40.92%;  }   
+.r2 {position:absolute;   top:42.24%;   left:49.47%;  } 
+.r3 {position:absolute;   top:42.24%;   left:57%;  } 
+.r4 {position:absolute;   top:42.24%;   left:64%;  } 
+.jum1{position:absolute;   top:42.31%;   left:47.63%;   width:2.89%;}
+.txt_sec {position:absolute;   top:44.19%;   left:72.47%;   width:8.03%;} 
+.ww{position:absolute;width:10.53%; top:83.20%}  
+.w0{left:4.08%}  
+.w1{left:15.26%;}  
+.w2{left:27.89%;}  
+.w3{left:38.95%;}  
+.w4{left:51.58%;}  
+.w5{left:62.11%;}  
+.w6{left:75.00%;}
+.w7{left:85.79%;}
+.btn_wordevent {position:absolute;   top:0.38%;   left:81.71%;   width:15.13%;}  
+.btn_click {position:absolute;   top:59.64%;   left:38.03%;   width:24.61%;}   
+.con_number{display:none;}
+.ww{display:none;}
+.rank_txt{width:100%; position:absolute;top:31.96%; }
+.rank1{margin:0 auto;}
+.num{float:left; width:10.00%;}
+.btn_com {position:absolute;   top:55.81%;   left:56.84%;   width:30.39%;}    
+.btn_re {position:absolute;   top:55.74%;   left:12.50%;   width:30.39%;}  
+.txt_wi {float:left; width:7.63%; margin-top:7%;}   
+.averSpeed{position:absolute;   top:49.5%;   left:56.32%; color:#b33138; font-size:2em;font-family:"Nanum Gothic","돋움",Dotum,"굴림",Gulim,Verdana,AppleGothic,sans-serif;}
+.txt_box{padding:1%; font-size:1em; height:2.7%; border:none; background-color:transparent;}
+.btn_confirm {position:absolute;   top:70.52%;   left:34.74%;   width:30.39%;}    
+.chkLabel {position:absolute;   top:64.14%;   left:48.68%;   width:42.37%;}    
+.name{position:absolute;   top:33.92%;   left:24.61%;   width:64.58%;}    
+.tel1 {position:absolute;   top:38.50%;   left:24.61%;   width:17.61%;} 
+.tel2 {position:absolute;   top:38.50%;   left:48%;   width:17.61%;}
+.tel3 {position:absolute;   top:38.50%;   left:72%;   width:17.61%;} 
+.adr{position:absolute;   top:43.30%;   left:24.61%;   width:64.58%;}
+.agree_box {position:absolute;   top:52.08%;   left:9.34%;   width:79.71%; height:9%; padding:1%; font-size:11px; line-height:14px;}    
+.btn_ca {position:absolute;   top:33.68%;   left:68.29%;   width:15.26%;}    
+.btn_end {position:absolute;   top:46.66%;   left:34.87%;   width:30.39%;}    
+.btn_fb {position:absolute;   top:33.68%;   left:42.24%;   width:15.26%;}    
+.btn_tw {position:absolute;   top:33.68%;   left:16.71%;   width:15.26%;}   
+.pop{display:none;} 
+</style>
+</head>
+<body>
+<div class="wrap game">
+	<div class="con">
+        <img class="bg" src="img/bg_game.png"/>
+        <div class="stage">
+        	<img class="gam" src="img/gam1.png"/>
+        </div>
+        <h1><a class="btn btn_logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/btn_logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_wordevent" href="game_word.html"><img src="img/btn_wordevent.png" alt="낱말퀴즈 이벤트GO"/></a>
+        <a class="btn btn_click"><img src="img/btn_click.png"/></a>
+        <div class="con_number">
+        	<div class="timer"><img src="img/timer.png"/></div>
+            <div class="rr r0"></div> <div class="jum1 r1"><img src="img/font/1/dot.png"/></div> <div class="rr r2"></div> <div class="rr r3"></div> <div class="rr r4"></div>
+            <div class="txt_sec"><img src="img/txt_sec.png"/></div>
+        </div>
+        <ul class="con_word">
+            <li class="ww w0"><img src="img/d1.png"/></li>
+            <li class="ww w1"><img src="img/d2.png"/></li>
+            <li class="ww w2"><img src="img/d3.png"/></li>
+            <li class="ww w3"><img src="img/d4.png"/></li>
+            <li class="ww w4"><img src="img/d5.png"/></li>
+            <li class="ww w5"><img src="img/d6.png"/></li>
+            <li class="ww w6"><img src="img/d7.png"/></li>
+            <li class="ww w7"><img src="img/d8.png"/></li>
+    	</ul>
+    </div>
+</div>
+
+<div class="pop">
+	<div class="con game_complete">
+    	<img class="bg" src="img/pop_complete.png"/>
+    	<h1><a class="btn btn_logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/btn_logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_close" href="main.html"><img src="img/btn_close.png" alt="닫기"/></a>
+        <a class="btn btn_re" href="main.html"><img src="img/btn_re.png" alt="다시하기"/></a>
+        <a class="btn btn_com" href="javascript:com()"><img src="img/btn_com.png" alt="완료"/></a>
+        <div class="rank_txt">
+        <div class="rank1"></div>
+        </div>
+        <div class="averSpeed"></div>
+    </div>
+    <div class="con game_input">
+    	<img class="bg" src="img/pop_input.png"/>
+    	<h1><a class="btn btn_logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/btn_logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_close" href="main.html"><img src="img/btn_close.png" alt="닫기"/></a>
+        <input type="text" class="txt_box name" title="이름"/>
+        <input type="text" class="txt_box tel1" title="전화번호 앞자리"/>
+        <input type="text" class="txt_box tel2" title="전화번호 중간자리"/>
+        <input type="text" class="txt_box tel3" title="전화번호 뒷자리"/>
+        <input type="text" class="txt_box adr" title="주소"/>
+        <div class="agree_box">
+        	개인정보취급방침<br>
+            개인정보취급방침<br>
+            개인정보취급방침<br>
+            개인정보취급방침<br>
+        </div>
+        <input type="checkbox" id="chk" class="chkInput" />
+        <label for="chk" class="chkLabel chk"><img src="img/chk_off.png" alt=""/></label>
+        <a class="btn btn_confirm" href="javascript:confirms()"><img src="img/btn_confirm.png"></a>
+    </div>
+
+    <div class="con game_sns">
+    	<img class="bg" src="img/pop_sns.png"/>
+    	<h1><a class="btn btn_logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/btn_logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_close" href="main.html"><img src="img/btn_close.png" alt="닫기"/></a>
+        <a class="btn btn_fb" href="javascript:()"><img src="img/btn_fb.png" alt="페이스북 공유"/></a>
+        <a class="btn btn_tw" href="javascript:()"><img src="img/btn_tw.png" alt="트위터 공유"/></a>
+        <a class="btn btn_ca" href="javascript:()"><img src="img/btn_ca.png" alt="카카오톡공유"/></a>
+        <a class="btn btn_end" href="javascript:()"><img src="img/btn_end.png" alt="종료"/></a>
+    </div>
+</div>
+</body>
+</html>

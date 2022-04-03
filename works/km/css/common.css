@@ -1,0 +1,59 @@
+@charset "utf-8";
+@font-face {
+    font-family:'NanumBarunGothic';
+    font-weight:400;
+    src: url('../font/NanumBarunGothic.eot');
+    src: url('../font/NanumBarunGothic.eot?#iefix') format('embedded-opentype'),
+         url('../font/NanumBarunGothic.woff') format('woff'),
+		 url('../font/NanumBarunGothic.ttf') format('truetype');
+}
+html,body,div,header,nav,section,aside,article,footer,figure,figcaption,ul,ol,li,dl,dt,dd,p,fieldset,span,a,img, h1,h2,h3,h4,h5 {margin:0;padding:0;}
+ul, ol{list-style:none;}
+.clearfix:after{overflow:hidden; content:""; display:block; clear:both;}
+a:link, a:visited, a:hover, a:focus{text-decoration:none;}
+img{vertical-align: top; border:none;width:100%;}
+body{ background-color:#fff; font-size:1.2em;	line-height:1.2;font-family:'NanumBarunGothic',"돋움", Dotum, "굴림", Gulim, Verdana, AppleGothic, sans-serif;}
+.ir{ display:block; text-indent:-9999em; height:0;width:0; overflow:hidden; position:absolute;}
+.btn{position:absolute; cursor:pointer;}
+.text_box{padding:0 1%; border:none; background-color:transparent; font-size:1em;}
+.btn_popup_close{position:absolute;      top: 1%; left: 89%;  width: 10%; height: 6%;} 
+.m_con{position:relative}
+.popupGame{position:relative}
+.popupGame .btn_popup_close{position:absolute;     top: 6%;    left: 92%;    width: 5%;    height: 9%;}
+.popupGame .btn_start{position:absolute;      left: 35%;    top: 70%;    width: 29%;    height: 14%;}
+.popupGame .btn_game11{position:absolute;    top: 47.29%; left: 33.43%; width: 7.92%; height: 7%;cursor:default}
+.popupGame .btn_game21{position:absolute;   top:70.34%;   left:30.70%;   width:10%;height: 7%;cursor:default}
+.popupGame .btn_game31{position:absolute;      top: 60.72%;   left: 30.4%;    width: 3.41%;    height: 8%;cursor:default}
+.popupGame .btn_game41{position:absolute;     top: 58.72%;    left:35%;    width: 9.03%;    height: 7%;cursor:default}
+.popupGame .btn_game51{position:absolute;     top: 30.86%;    left: 36.46%;    width: 6.88%;    height: 7%;cursor:default}
+.game1 .o1{position:absolute;  top:41.08%;   left:35.95%;   width:7.25%;}  
+.game2 .o1{position:absolute;  top:63.53%;   left:28.33%;   width:7.25%;} 
+.game3 .o1{position:absolute;   top:55.11%;   left:28.55%;   width:7.25%;}   
+.game4 .o1{position:absolute;  top:52.30%;   left:35.06%;   width:7.25%;}  
+.game5 .o1{position:absolute; top:25.05%;   left:34.62%;   width:7.25%;} 
+.popupGame .btn_game12{position:absolute;     top: 47.29%;    left: 82.39%;    width: 7.92%;height: 7%;cursor:default}
+.popupGame .btn_game22{position:absolute;  top:70.14%;   left:79.44%;   width:10%;height: 7%;cursor:default}
+.popupGame .btn_game32{position:absolute;    top: 60.72%;    left: 79.1%;    width: 3.41%;    height: 8%;cursor:default}
+.popupGame .btn_game42{position:absolute;    top: 58.72%;    left: 83.87%;   width: 9.03%;    height: 7%;cursor:default}
+.popupGame .btn_game52{position:absolute;     top: 30.86%;    left: 82.25%;    width: 12.88%;    height: 7%;cursor:default}
+.game1 .o2{position:absolute;  top:40.68%;   left:84.84%;   width:7.25%;}  
+.game2 .o2{position:absolute;top:63.53%;   left:76.92%;   width:7.25%;} 
+.game3 .o2{position:absolute;  top:55.11%;   left:77.44%;   width:7.25%;} 
+.game4 .o2{position:absolute;  top:52.30%;   left:83.95%;   width:7.25%;}  
+.game5 .o2{position:absolute; top:24.85%;   left:80.77%;   width:7.25%;}  
+.popupGame .btn_fb{position:absolute; left: 19%;    top: 78%;    width: 13%;    height: 9%;}
+.o{display:none;}
+.screen{position:absolute;    left: 0; top: 32%;display:none}
+.x{position:absolute; left: 0; top: 0;width:7.25%;}
+
+.web body{position:relative; width:1024px; margin:0 auto;}
+.mobile .game_timer{    position: absolute;    right: 45%;    width: 10%;    text-align: center;top: 32%;    display: none;    font-size: 4vw;    color: #0e3e3d;}
+.mobile .game6 .per{position:absolute;         right: 40%;   width: 20%;    text-align: right;    top: 33%; font-size:5.4vw; color:#fff;}
+.mobile .game6 .dis1{position:absolute;     left: 0; width:100%; text-align:center; top: 49%; font-size:2vw; color:#4d4d4d; font-weight:bold;}
+.web .game_timer{    position: absolute;    right: 45%;    width: 10%;    text-align: center;top: 32%;    display: none;    font-size: 1.6em;    color: #0e3e3d;}
+.web .game6 .per{position:absolute;         right: 40%;   width: 20%;    text-align: right;    top: 33%; font-size:3em; color:#fff;}
+.web .game6 .dis1{position:absolute;     left: 0; width:100%; text-align:center; top: 49%; font-size:0.8em; color:#4d4d4d; font-weight:bold;}
+
+
+.game6 .dis2{position:absolute; left: 25%;width: 52%; top: 57%;}
+.mal{position:absolute; top:13.55%;   left:2.15%;   width:95.7%; z-index:100;} 

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<title>PORTFOLIO</title>
+<link href="css/apps.css" rel="stylesheet"/>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/input.js"></script>
+<script>
+$(document).ready(function() {
+	$(".pop>.bg").fadeTo(0,0.5);
+	resizePop();
+	var chk1 = new set_chk("chkLabel","chkInput");
+});
+$(window).resize(function(){
+	resizePop();
+});
+function resizePop(){
+	if($(document).width() <= 1023){
+		$(".pop>.bg").css("width","1023px");
+	}else{
+		$(".pop>.bg").css("width","100%");
+	}
+	if($(document).height() <= 800){
+		$(".pop>.bg").css("height","800px");
+	}else{
+		$(".pop>.bg").css("height",$(document).height());
+	}
+}
+function start(){
+	location.href="main.html";
+}
+function pop_input(){
+	$(".pop").css("display","block")
+	$(".sns_input").css("display","block");
+	$(".sns_sns").css("display","none");
+}
+function pop_confirm(){
+	$(".pop").css("display","block")
+	$(".sns_input").css("display","none");
+	$(".sns_sns").css("display","block");
+}
+
+function close(){
+	$(".pop").css("display","none")
+}
+//////////////////
+$(function(){
+	$(".box").focus(function(){
+		var rs = $(this).attr("class").split(" ")[1];
+		var compare = rs.substr(4,1)
+		$(".bg_input"+compare).css("display","block")
+
+	})
+	$(".box").click(function(){
+		var rs = $(this).attr("class").split(" ")[1];
+		var compare = rs.substr(4,1)
+	
+	})
+	$(".box").keyup(function(){
+		var val = $(this).val();
+		if(val.length>1){
+			alert("한글자만 입력해 주세요.")
+			$(this).val("")
+			$(this).focus()
+			return;
+		}
+	})
+	var n=0
+	var rsArr=[]
+	$(".box").blur(function(){
+		var rs = $(this).attr("class").split(" ")[1];
+		var compare = rs.substr(4,1)
+		if($(this).val()==""){
+			$(".bg_input"+compare).css("display","none")
+			return;
+		}else{
+			for(var i=0;i<rsArr.length;i++){
+				if(compare==rsArr[i]){
+					return;
+				}
+			}
+			switch(rs){
+				case "quiz1":
+					if($(this).val()=="창"){
+						alert("정답")
+						rs=rs.substr(4,1)
+						$(".key"+compare).css("display","block")
+						$(this).attr("readonly","readonly")
+						rsArr.push(rs)
+						return;
+					}
+				break;
+				case "quiz2":
+					if($(this).val()=="조"){
+						alert("정답")
+						rs=rs.substr(4,1)
+						$(".key"+compare).css("display","block")
+						$(this).attr("readonly","readonly")
+						rsArr.push(rs)
+						return;
+					}
+				break;
+				case "quiz3":
+					if($(this).val()=="문"){
+						alert("정답")
+						rs=rs.substr(4,1)
+						$(".key"+compare).css("display","block")
+						$(this).attr("readonly","readonly")
+						rsArr.push(rs)
+						return;
+					}
+				break;
+				case "quiz4":
+					if($(this).val()=="화"){
+						alert("정답")
+						rs=rs.substr(4,1)
+						$(".key"+compare).css("display","block")
+						$(this).attr("readonly","readonly")
+						rsArr.push(rs)
+						return;
+					}
+				break;
+			}
+			alert("틀렸습니다. 다시시도해주세요.")
+			$(this).val("")
+			$(this).focus()
+		}
+	})
+	$(".key").click(function(){
+		var key = $(this).attr("class").split(" ")[1].substr(3,1)
+		$(".quiz"+key).focus()
+	})
+	$(".key_garo_btn, .key_sero_btn").click(function(){
+		if($(this).attr("class")=="key_garo_btn"){
+			$(".key_garo, .key_garo_quiz").css("display","block")
+			$(".key_sero, .key_sero_quiz").css("display","none")
+		}else{
+			$(".key_sero, .key_sero_quiz").css("display","block")
+			$(".key_garo, .key_garo_quiz").css("display","none")
+		}
+
+	})
+	$(".btn_com_quiz").click(function(){
+		if(rsArr.length==4){
+			alert("이벤트 응모 페이지 이동")
+			pop_input();
+		}else{
+			alert("퀴즈가 "+(4-rsArr.length)+"문제 남았습니다.")
+		}
+	})
+})
+
+</script>
+<style>
+body{ background-color:#4a5e3f}
+.wrap{ background:url(img/bg_quiz.png) center top repeat-x scroll; min-width:1023px;   height:800px;}
+.content{width:1023px; margin:0 auto; position:relative;}
+.logo{position:absolute; top:0px; left:3px;}
+.btn_quiz{position:absolute; top:7px; right:4px;}
+.box{width: 24px;position: absolute;border:none;background-color:transparent;text-align: center;z-index:1000; font-size:14px; padding:5px 0;}
+.quiz1{top: 321px;left: 375px;}
+.quiz2{top: 398px;left: 272px;}
+.quiz3{top: 501px;left: 118px;}
+.quiz4{top: 501px;left: 401px;}
+.key{position: absolute;border: 0 solid white;text-align: center;display:none;}
+.key1{top: 295px;left: 483px;}
+.key2{top: 295px;left: 541px;}
+.key3{top: 295px;left: 711px;}
+.key4{top: 295px;left: 768px;}
+.key_garo{position: absolute;top: 425px;left: 477px;}
+.key_sero{position: absolute;top: 425px;left: 477px;display:none;}
+.key_garo_btn{position: absolute;top: 425px;left: 477px;width:160px;height:35px;cursor:pointer;opacity:0;z-index:999;}
+.key_sero_btn{position: absolute;top: 425px;left: 644px;width:160px;height:35px;cursor:pointer;opacity:0;z-index:999;}
+.btn_com_quiz{position: absolute;top: 633px;left: 640px;cursor:pointer;}
+.quiz_text{position: absolute;width: 415px;height: 129px;top: 480px;left: 499px;overflow-y:scroll;font-size:15px;line-height:25px;}
+.key_sero_quiz{display:none;}
+.bg_input{position: absolute;z-index:999; display:none;}
+.bg_input1{top: 321px;left: 374.5px;}
+.bg_input2{top: 398px;left: 272.3px;}
+.bg_input3{top: 501px;left: 117.5px;}
+.bg_input4{top: 501px;left: 400.5px;}
+
+.sns_input{width:630px; height:650px; background:url(img/pop_input_quiz.png) no-repeat scroll; margin:0 auto; position:relative;}
+.sns_sns{width:630px; height:650px; background:url(img/pop_sns_quiz.png) no-repeat scroll; margin:0 auto; position:relative;}
+
+.btn_re{ position:absolute; width:158px; height:56px;top:474px; left:118px;}
+.btn_com{position:absolute; width:158px; height:56px;top:474px; left:355px;}
+.rank_txt{ margin:0 auto; position:relative; top:268px;}
+.txt_wi{float:left;position:relative; top:36px;}
+.num{width:56px; height:84px; overflow:hidden; float:left; background:url(img/number2.png) no-repeat scroll; }
+.btn_confirm{position:absolute; width:157px; height:54px;top:544px; left:237px;}
+.chkLabel{position:absolute;top:510px; left:355px;}
+.averSpeed{ position:absolute;top:421px; left:343px; color:#b33138; font-size:24px;}
+.txt_box{border:none; background-color:transparent; font-size:20px; color:#000; padding:5px;}
+.name{ left: 181px;position: absolute; top: 257px;  width: 332px;}
+.tel1{ left: 181px;   position: absolute;  top: 298px;  width: 90px;}
+.tel2{ left: 301px;  position: absolute;   top: 298px;  width: 90px;}
+.tel3{ left: 422px;  position: absolute; top: 298px;  width: 90px;}
+.adr{left: 181px; position: absolute; top: 339px;  width: 332px;}
+.agree_box{ color: #000;  font-size: 12px;  height: 83px;left: 103px;   padding: 5px; position: absolute; top: 410px; width: 410px; overflow-x:hidden; overflow-y:auto;}
+.btn_fb{position:absolute; top:277px;left:199px; width:72px; height:72px;}
+.btn_tw{position:absolute; top:277px;left:359px; width:72px; height:72px;}
+.btn_popquiz{position:absolute; top:425px;left:110px; width:189px; height:55px;}
+.btn_end{position:absolute; top:425px;left:369px; width:158px; height:55px;}
+.pop{position:absolute;top:0;left:0; width:100%; display:none; z-index:1000;}
+.pop .bg{position:absolute;top:0;left:0; width:100%; height:100%;background-color:#000;}
+.btn_close{position:absolute; width:50px; height:50px; }
+.sns_input .btn_close{top:30px; right:0px;}
+.sns_sns .btn_close{top:33px; right:0px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="content">
+        <h1><a class="btn logo" href="http://www.mcst.go.kr/main.jsp" target="_blank"><img src="img/logo.png" alt="문화체육관광부"/></a></h1>
+        <a class="btn btn_quiz" href="main.html"><img src="img/btn_game.png" alt="낱말퀴즈 이벤트GO"/></a>
+		<input type="text" class="box quiz1">
+		<input type="text" class="box quiz2">
+		<input type="text" class="box quiz3">
+		<input type="text" class="box quiz4">
+		<img class="key key1" src="img/key1.png">
+		<img class="key key2" src="img/key2.png">
+		<img class="key key3" src="img/key3.png">
+		<img class="key key4" src="img/key4.png">
+		<img class="key_garo" src="img/key_garo.png">
+		<div class="key_garo_btn"></div>
+		<img class="key_sero" src="img/key_sero.png">
+		<div class="key_sero_btn"></div>
+		<img class="btn_com_quiz" src="img/btn_com_quiz.png">
+		<img class="bg_input bg_input1" src="img/bg_input1.png">
+		<img class="bg_input bg_input2" src="img/bg_input2.png">
+		<img class="bg_input bg_input3" src="img/bg_input3.png">
+		<img class="bg_input bg_input4" src="img/bg_input4.png">
+		<div class="key_garo_quiz quiz_text">
+			3. 창의 가장자리나 그 부근. “OO에 기대어 떨어지는
+			낙엽을 바라본다.”<br>
+			5. 바다 위나 공중에서 긴 거리를 잴 때 쓰는 단위.<br>
+			6. 힘껏 달림.<br>
+			8. 역사나 신화, 전설, 영웅의 행적 등을 사실대로 쓴 시.<br>
+			9. 소의 양지머리 뼈에 붙은 빛이 희고 기름진 고기.<br>
+			11. 사람이 타지 않고 지상에서 원격 조종하는 무인
+			비행체.<br>
+			12. 슬프고 애타는 느낌을 주는 국악의 한 음조. 단조와
+			비슷하죠.<br>
+			14. 뽕나무의 열매.<br>
+			15. 달을 보고 즐김. “저녁을 먹고 나서 가족과 함께
+			OOO을 나갔다.”<br>
+			17. 드나드는 길목의 첫머리. “우리 동네 OO로
+			접어들자 멀리서 어머니가 손을 흔들며 서 계셨다.”<br>
+			19. 솥이나 냄비 바닥에 눌어붙은 밥.<br>
+			20. 사람이 살아가는 데 필요한 옷과 음식과 집.<br>
+			22. 농악을 연주하는 사람들의 무리. “징, 꽹과리,
+			장구를 치며 OOO가 신명 나게 동네를 한 바퀴
+			돌았다.”<br>
+			24. 아내의 여동생.<br>
+			26. 어떤 일을 하려고 할 때 상대의 기세를 억누르기
+			위해 먼저 하는 행동. “경기 초반에 강력한 슛을
+			쏘아서 OO을 제압하는 것이 좋다.”<br>
+			28. 그때에 바로 알맞게. “기쁜 소식을 전하려던 참인데
+			OOO 그 사람으로부터 전화가 걸려왔다.”<br>
+			30. 텔레비전이나 전송사진 등에서 화면을 구성하고
+			있는 최소 단위의 명암의 점. pixel.<br>
+			31. 작은 종잇조각. 요즘은 SNS에서 주고받는 짧은
+			편지를 가리키기도 하죠.<br>
+			32. 어떤 행동이나 일의 진행에 방해가 됨. “지금까지
+			양심에 OOO이 없이 살아왔다.”<br>
+			34. 바로 이제. 바로 조금 전. “기차가 OO 떠났다.”<br>
+			36. 일을 하다가 잠깐 쉬면서 먹는 음식.<br>
+			38. 다른 사람에게 자기 남편을 낮추어 이르는 말.<br>
+			40. 꽃잎이나 잎에 있는 잔털.<br>
+			42. 부산 사하구에 있는 섬. 낙동강 하류의 철새
+			도래지로 유명하죠.<br>
+			43. 오랫동안 반복하여 저절로 몸에 굳어진 행동.
+			윗사람에게 지켜야 할 예의. “어른 앞에서 OO없이
+			행동하면 안 된다.”<br>
+			44. 여러 사람의 말이 한결같음을 이르는 말.<br>
+			46. 오이, 무, 마늘 등을 간장이나 된장, 고추장에
+			절였다가 오래 두고 먹는 음식.<br>
+		</div>
+		<div class="key_sero_quiz quiz_text">
+			1. 같은 자리. “추석날 모처럼 온 가족이 OOO에
+			모였다.”<br>
+			2. 얼마 전 북한의 군사 위협에 맞서서 “끝까지
+			싸우겠다”며 OO을 자진 연기한 전후방 부대
+			장병들이 있어서 우리 마음을 든든하고 행복하게
+			해주었습니다.<br>
+			4. 한 지점에서 거리가 조금 떨어져 있는 상태. 멀지
+			않은. “좀 더 OOO 다가오렴.”<br>
+			5. 태양의 그림자 길이와 위치의 변화를 이용해
+			시간을 재는 시계.<br>
+			7. 자동차를 일정한 곳에 세워둠.<br>
+			8. OO→본론→결론<br>
+			10. 야구에서 투수가 던지는 공이 힘이 좋고 ‘돌’처럼
+			강한 ‘직구’일 때 이렇게 부르죠.<br>
+			11. 어떤 경과가 있은 후 마지막에 이르러. 무엇으로
+			인한 그 결과로. “OOO 시험이 끝났다.”<br>
+			13. 지게미와 쌀겨로 끼니를 이을 정도로 몹시
+			가난하고 어려울 때 고생을 함께 겪은 아내를
+			이르는 말.<br>
+			15. 고추 먹고 맴맴∼ OO 먹고 맴맴∼.<br>
+			16. 서울과 신의주를 잇는 철도.<br>
+			18. 다른 일을 하다가 농사를 지으려고 농촌으로
+			돌아감.<br>
+			19. 여러 대(代). “OO에 걸쳐 전해 내려오는 이야기.”<br>
+			21. 자동차 기름을 어디에서 넣죠?<br>
+			23. 어떤 일을 끈덕지고 억척스럽게 해나가는 사람.
+			또는 성미가 까다롭고 고집이 세며 모진 데가 있는
+			사람을 이렇게 부르죠.<br>
+			25. 정해놓은 그 시각. 어떤 일의 알맞은 때. “그 일은
+			미루지 말고 OO 처리해야 한다.”<br>
+			26. 콜록콜록∼<br>
+			27. 출입문 밑에 마루보다 조금 높게 가로로 댄 나무.
+			“OOO에 걸터앉다.”<br>
+			29. 예수의 어머니.<br>
+			30. 설탕을 탄 물이나 오미잣국 등에 과일이나 꽃을
+			넣고 잣을 띄워 만든 음료.<br>
+			33. 확실히 드러나지 않고 일이 되어가는 야릇하고
+			묘한 분위기. 또는 그런 것을 알아챌 수 있는 눈치.
+			“아무래도 OO가 이상하군.”<br>
+			35. 자금의 수요와 공급에 관계되는 활동. OO기관<br>
+			37. 꾹 참고 견디는 성질. “그는 OOO이 강하다.”<br>
+			38. Map<br>
+			39. DMZ<br>
+			41. 닭이나 날짐승의 먹이.<br>
+			43. 벚나무의 열매.<br>
+			45. 같은 부모에게서 나보다 늦게 태어난 사람.
+		</div>
+    </div>
+</div>
+<div class="pop">
+	<div class="bg"></div>
+    <div class="pop_con sns_input">  	
+        <a class="btn btn_close" href="javascript:close()"><span class="ir">닫기</span></a>
+        <input type="text" class="txt_box name" title="이름"/>
+        <input type="text" class="txt_box tel1" title="전화번호 앞자리"/>
+        <input type="text" class="txt_box tel2" title="전화번호 중간자리"/>
+        <input type="text" class="txt_box tel3" title="전화번호 뒷자리"/>
+        <input type="text" class="txt_box adr" title="주소"/>
+        <div class="agree_box">
+        	개인정보취급방침
+        </div>
+        <input type="checkbox" id="chk" class="chkInput" />
+        <label for="chk" class="chkLabel chk"><img src="img/chk_off.png" alt=""/></label>
+        <a class="btn btn_confirm" href="javascript:pop_confirms()"><span class="ir">확인</span></a>
+    </div>
+    <div class="pop_con sns_sns">
+    	<a class="btn btn_close" href="javascript:close()"><span class="ir">닫기</span></a>
+        <a class="btn btn_fb" href="javascript:()"><span class="ir">페이스북</span></a>
+        <a class="btn btn_tw" href="javascript:()"><span class="ir">트위터</span></a>
+        <a class="btn btn_popquiz" href="javascript:()"><span class="ir">게임 이벤트로 가기</span></a>
+        <a class="btn btn_end" href="javascript:()"><span class="ir">종료</span></a>
+    </div>
+</div>
+
+</body>
+</html>

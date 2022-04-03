@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title></title>
+<style>
+ #hit {position:absolute;top:8%; left:3.1%; width:19%; }
+ #log {  position: absolute;  padding: 10px;  }
+.drag_area {position:absolute;   top:80.72%;   left:11.09%;   width:77.50%;}
+</style>
+<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+<div class="wrap">
+    <div class="drag_area">
+		<img src="img/drag_area.png"/>
+		<div id="hit"><img  src="img/hit.png"/></div>
+    </div>
+</div>
+
+<script src="js/hammer.js"></script>
+<script>
+
+function aaa(){
+$("#hit").animate({left:0+"px"},"100");
+}
+
+
+
+
+Object.prototype.toDirString = function() {
+	var output = [];
+	for(var key in this) {
+		if(this.hasOwnProperty(key)) {
+			var value = this[key];
+			if(Array.isArray(value)) {
+				value = "Array("+ value.length +"):"+ value;
+			} else if(value instanceof HTMLElement) {
+				value = value +" ("+ value.outerHTML.substring(0, 50) +"...)";
+			}
+		
+			var distanceValue;
+			var isFinalValue="";
+			if(key == "distance"){
+				distanceValue = value;
+			}
+			if(key =="isFinal"){
+				isFinalValue = String(value);
+			}
+	
+			var w = parseInt($(".drag_area").css("width"));
+			var left_right = parseInt($(".drag_area").css("width"))*0.03;
+			var hit_left =	parseInt($("#hit").css("left"));
+			var hit_w = parseInt($("#hit").css("width"));
+			if(left_right <= hit_left && w-((left_right*2)+hit_w) >= hit_left ){
+				if(isFinalValue=="0" || isFinalValue==""){
+					$("#hit").css("left",(left_right+distanceValue)+"px")
+					
+				}else if(isFinalValue=="true"){
+					
+					$("#hit").css("left",left_right)
+				}
+			}
+			
+			
+			
+		}
+	}
+
+};
+
+
+
+
+var el = document.querySelector("#hit");
+var mc = new Hammer.Manager(el);
+mc.add(new Hammer.Swipe({ direction: Hammer.DIRECTION_HORIZONTAL }));
+mc.add(new Hammer.Pan({ direction: Hammer.DIRECTION_HORIZONTAL })).recognizeWith(mc.get('swipe'));
+mc.on("pan ", logGesture);
+function logGesture(ev) { ev.toDirString();}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function() {
+   // setStage1();
+});
+function start(){
+	$(".stage").css("top","79px");
+	setStage1();
+}
+var stage1Num;
+var timerNum=15;
+var totalNum = 9;
+var minObjNum = 3;
+var winW=185;
+var winH=195;
+var objNum=3;
+var sufNum=0;
+var arrPosX = [];
+var arrPosY = [];
+var arrObj = [];
+
+function setStage1(){
+	for(var i=0; i<$(".con_win>li").length; i++){
+		//parseInt($(".obj").eq(i).css("top"))
+		//parseInt($(".obj").eq(i).css("left"))
+		$(".win").eq(i).css("top",$(".obj").eq(i).css("top")).css("left",$(".obj").eq(i).css("left"))
+		//$(".obj").eq(i).css("top",winH*Math.floor(i/4)).css("left",winW*(i%4))
+		arrObj[i] = i;
+		arrPosX[i] = parseInt($(".obj").eq(i).css("left"))
+		arrPosY[i] = parseInt($(".obj").eq(i).css("top"))
+	}
+	shuffle(arrObj)	
+	timer();
+}
+function timer(){
+	if(timerNum <= 1){
+		setTimeout(function(){
+			$(".obj").css("display","none");
+			alert("범인을 찾아롸")	
+			//alert(stage1Num)
+			$(".win").click(function(){
+				if($(this).index() == stage1Num){
+					$(".obj3").css("display","block")
+					alert("범인을 검거했습니다")
+					setTimeout(function(){
+						location.href="after_game.html?code=3"
+					},1000)
+				}
+			});
+		},timerNum*200)
+	}else{
+		setTimeout(function(){timer(); visibleObj();},timerNum*100)
+		timerNum= timerNum-1;
+	}
+}
+function visibleObj(){
+	$(".obj").css("display","none");
+	var num;
+	if(sufNum >= totalNum - minObjNum){
+		num = totalNum - sufNum
+		for(i=sufNum; i<sufNum+num; i++){
+
+			$(".obj"+(arrObj[i]+1)).css("display","block").css("top",arrPosY[i]).css("left",arrPosX[i]);
+			if(arrObj[i]+1 == objNum){
+				stage1Num = i;
+			}
+		}
+		sufNum = sufNum+num
+		if(sufNum == totalNum){
+			shuffle(arrObj)	
+			sufNum=0;
+		}
+	}else{
+		num = Math.ceil(Math.random()*minObjNum);
+		for(i=sufNum; i<sufNum+num; i++){
+			$(".obj"+(arrObj[i]+1)).css("display","block").css("top",arrPosY[i]).css("left",arrPosX[i]);
+	
+			if(arrObj[i]+1 == objNum){
+				stage1Num = i;
+			}
+		}
+		sufNum = sufNum+num
+	}
+}
+function shuffle(o){
+	for(var j,x,i=o.length; i;j=parseInt(Math.random()*i),x=o[--i],o[i] = o[j],o[j]=x);
+	return o;
+}
+
+
+</script>
+<style>
+body{color:#000; font-size:1.2em;}
+.stage{position:absolute; /*top:79px;*/ top:-100%;left:22px; width:980px; height:430px;overflow:hidden;}
+.win{position:absolute; width:185px; height:195px; }
+.obj{position:absolute; width:185px; height:195px; display:none;}
+.obj1{top:15px; left:72px;}
+.obj2{top:15px; left:287px;}
+.obj3{top:15px; left:502px;}
+.obj4{top:15px; left:717px;}
+.obj5{top:220px; left:72px;}
+.obj6{top:220px; left:287px;}
+.obj7{top:220px; left:502px;}
+.obj8{top:220px; left:717px;}
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+<img src="img/bg_game3.jpg" usemap="#Map"/>
+<map name="Map">
+  <area shape="rect" coords="374,418,653,476" href="javascript:start()" alt="게임시작">
+</map>
+<div class="stage stage1">
+<img class="bg_stage1" src="img/bg_stage1.png"/>
+	<ul class="con_win">
+    	<li class="win win1"></li>
+        <li class="win win2"></li>
+        <li class="win win3"></li>
+        <li class="win win4"></li>
+        <li class="win win5"></li>
+        <li class="win win6"></li>
+        <li class="win win7"></li>
+        <li class="win win8"></li>
+    </ul>
+	<img class="obj obj1" src="img/e1.png">
+    <img class="obj obj2" src="img/e2.png">
+    <img class="obj obj3" src="img/e3.png">
+    <img class="obj obj4" src="img/e4.png">
+    <img class="obj obj5" src="img/e5.png">
+    <img class="obj obj6" src="img/e6.png">
+    <img class="obj obj7" src="img/e7.png">
+    <img class="obj obj8" src="img/e8.png">
+    <img class="obj obj9" src="img/e9.png">
+</div>
+
+</div>
+</body>
+</html>

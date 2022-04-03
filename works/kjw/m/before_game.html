@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="robots" content="all">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/apps.css">
+<title>NIS 국가정보원 :: 국가 안보 요원 테스트</title>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/common.js"></script>
+<script>
+$(document).ready(function(e) {
+	gNum = getLocationParameter('code');
+	$(".timer").css("top",timeArrY[gNum]).css("left",timeArrX[gNum])
+	$(".timer_lock").attr("src","img/timer"+gNum+"_lock.png")
+	$(".timer_pop_img").attr("src","img/timer"+gNum+".png")
+	$(".office_img").attr("src","img/office"+gNum+".png")
+	$(".office_txt").attr("src","img/office"+gNum+"_txt.png")
+	timerGif();
+	$(".timer_pop").css("top","10.67%");
+	$(".timer_pop").fadeTo(0,0);
+	$(".timer_pop").animate({"top":"22.34%","opacity":1},1000)
+});
+var gNum
+var isOver = false;
+var timeArrX = [];
+var timeArrY = [];
+timeArrX[1] = "10.94%"
+timeArrY[1] = "32.81%"
+timeArrX[2] = "22.50%"
+timeArrY[2] = "32.81%"
+timeArrX[3] = "10.94%"
+timeArrY[3] = "47.34%" 
+timeArrX[4] = "22.50%"
+timeArrY[4] = "47.34%"
+function timerGif(){
+	var timer = $(".timer")
+	setInterval(function(){
+		if(isOver == false){
+			timer.attr("src","img/timer"+gNum+"_over.png")
+			isOver=true;
+		}else{
+			timer.attr("src","img/timer"+gNum+"_out.png")
+			isOver=false;
+		}
+	},500)
+}
+function go_mission(){
+	$(".office").css("top","10.67%");
+	$(".office").fadeTo(0,0);
+	$(".office").animate({"top":"19.60%","opacity":1},1000)
+	$(".con_timer").css("display","none")
+	$(".con_office").css("display","block")
+}
+function go_test(){
+	location.href="game"+gNum+".html";
+}
+</script>
+<style>
+body{ background-color:#e5e5e5}
+.wrap{position:relative;}
+.timer_lock {position:absolute;   top:32.97%;   left:10.94%;   width:22.19%;}    
+.timer {position:absolute;   top:32.81%;   left:10.94%;   width:10.63%;} 
+
+.timer_pop{position:absolute;   top:22.34%;   left:40.63%;   width:55.10%;  }
+.btn_mission_go {position:absolute;   top:61.92%;   left:27.3%;   width:47.64%;} 
+
+.con_office{display:none;}
+.office {position:absolute;   top:16.88%;   left:16.35%;   width:66.77%;}    
+.office_txt {position:absolute;   top:76.72%;   left:1.35%;   width:96.88%;}
+.btn_before_test {position:absolute;   top:59.00%;   left:25.43%;   width:48.52%;} 
+</style>
+</head>
+<body class="loading">
+<div class="wrap">
+
+<div class="con_timer">
+    <img src="img/bg_timer.jpg">
+    <div>
+        <img class="timer_lock" src="img/timer_lock.png">
+    	<img class="timer" src="img/timer1_out.png">
+    </div>
+    <div class="timer_pop">
+    	<img class="timer_pop_img" src="img/timer.png" >
+        <a class="btn_mission_go" href="javascript:go_mission()" ><img src="img/btn_mission_go.gif" alt="임무수행하러가기"></a>
+    </div>
+</div>
+<div class="con_office">
+	<img src="img/bg_office.jpg">
+    <div class="office">
+        <img class="office_img" src="img/office.png"  >
+        <a href="javascript:go_test()" class="btn_before_test"><img  src="img/btn_before_test.png" alt="요원 테스트 시작하기"></a>
+    </div>
+    <div>
+        <img class="office_txt" src="img/office_txt.png">
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>
