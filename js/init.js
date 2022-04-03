@@ -87,17 +87,19 @@ var isQAing = false;
 var questionObj ={
 	"첫인사":[
 		"안녕 반가워! 개발자 윤창수라고 해~ ",
-		"이곳은 내 포트폴리오 사이트고 pc으로도 볼수 있지만 모바일로 보는게 편할꺼야",
-		"아래 가상키보드에 메뉴를 눌러서 이곳을 둘러볼수있어~"
+		"이곳은 내 포트폴리오 사이트고 PC로도 볼수 있지만 모바일로 보는게 편할꺼야",
+		"요 아래↓ 입력창을 누르면, 가상키보드 메뉴로 이곳을 둘러 볼수 있어~"
 	],	
 	"너는 누구야?":[
-		"내가 좀 유치해서 윤초딩이라는 별명이 있구ㅋㅋ 사는 곳은 서울 보라매역 인근에 살고 있어.",
-		"나이는 사팔청춘 40이구... 좀 많지?ㅎㅎ 성격은 무난히 사회생활 할 정도는 되는거 같어!! 헤헤"
+		"내가 좀 유치해서 윤초딩ㅋㅋ이라는 별명이 있구 사는 곳은 서울 보라매역 인근에 살고 있어.",
+		"성격은 무난하게 사회생활 할 정도는 되는거 같어~"
 	],	
 	"뭐 할줄 알아?":[
-		"플래시로 사회생활을 시작했는데 플래시가 망하는 바람에ㅠㅠ",
-		"힘들었지만, 그래도 나름 미리 준비해서 안정적으로 웹프론트엔드 개발로 전향했어.",
-		"지금은 주업무가 웹퍼블리싱이고, 안주하지 않고 자기계발을 통해 nodejs, 모바일 게임 앱, 하이브리드앱, VR도 만들 줄 알아~"
+		"어도비 플래시로 사회생활을 시작했는데, 플래시가 망하는 바람에ㅠㅠ",
+		"그래서 오래전에 웹퍼블리셔로 전향했고, 하다보니 웹프론트엔트하게 되어서, 관련프로젝트도 3개정도 해봤어",
+		"최근에는 모바일 개발에도 관심이 생겨서, 모바일앱 게임, 모바일앱 오픈 경험이 있어"
+		//"힘들었지만, 그래도 나름 미리 준비해서 안정적으로 웹 프론트엔드 개발로 전향했어.",
+		//"지금은 주업무가 웹퍼블리싱이고, 안주하지 않고 자기계발을 통해 nodejs, 모바일 게임 앱, 하이브리드앱, VR도 만들 줄 알아~"
 	],	
 	"작업한거 보여줘":[
 		"링크줄께. 기달려봐~",
@@ -110,9 +112,9 @@ var questionObj ={
 	],	
 	"연락처는?":[
 		"작업하는거야!?",
-		"농담이구ㅋㅋ 폰은 010 6617 2136 이메일은 berserk78@naver.com 이니깐 스팸만 보내지 말아줘~"
+		"농담이구ㅋㅋ 핸폰은 010 6617 2136 이메일은 berserk78@naver.com 이니깐 스팸만 보내지 말아줘~"
 	],	
-	"옛날작업 뭐있어?":[
+	"옛날 작업 뭐있어?":[
 		"<a href='portfolio_2014/index.html' target='_blank' style='text-decoration:underline'>2015 이전 작업 보러가기</a>",
 		"위에 보러가기를 새창링크로 볼수 있을꺼야~"
 	]
@@ -281,7 +283,8 @@ function setTotalSize(){
 	if($(window).height() > 970){
 		$(".web .con_main").height($(window).height());
 	}else{
-		$(".web .con_main").height(970);
+		$(".web .con_main").height($(window).height());
+		//$(".web .con_main").height(970);
 	}
 	//mobile H:970px min
 	$(".mobile .con_main").height($(window).height());
@@ -294,7 +297,7 @@ function getCurrentDate(){
   var month = today.getMonth() + 1;
   var day = today.getDate();
   var dayName = week[today.getDay()];
-  $(".current_date .txt").text(year+"년"+month+"월"+day+"일"+dayName+"요일")
+  $(".current_date .txt").text(year+"년 "+month+"월 "+day+"일 "+dayName+"요일")
 }
 //current time
 function printClock() {
