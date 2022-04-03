@@ -95,15 +95,15 @@ var questionObj ={
 		"성격은 무난하게 사회생활 할 정도는 되는거 같어~"
 	],	
 	"뭐 할줄 알아?":[
-		"어도비 플래시로 사회생활을 시작했는데, 플래시가 망하는 바람에ㅠㅠ",
-		"그래서 오래전에 웹퍼블리셔로 전향했고, 하다보니 웹프론트엔트하게 되어서, 관련프로젝트도 3개정도 해봤어",
-		"최근에는 모바일 개발에도 관심이 생겨서, 모바일앱 게임, 모바일앱 오픈 경험이 있어"
+		"어도비 플래시로 직장생활을 시작했는데, 플래시가 망하는 바람에ㅠㅠ",
+		"그래서 오래전에 웹퍼블리셔로 전향했고, 요새 핫한 웹프론트엔트 스킬도 습득해, 관련프로젝트도 3개정도 해봤어",
+		"모바일에도 관심이 있어서, 모바일앱 게임, 모바일앱 오픈 경험도 있어"
 		//"힘들었지만, 그래도 나름 미리 준비해서 안정적으로 웹 프론트엔드 개발로 전향했어.",
 		//"지금은 주업무가 웹퍼블리싱이고, 안주하지 않고 자기계발을 통해 nodejs, 모바일 게임 앱, 하이브리드앱, VR도 만들 줄 알아~"
 	],	
 	"작업한거 보여줘":[
-		"링크줄께. 기달려봐~",
-		'<a href="javascript:openPortfolio(1);" style="text-decoration:underline;">2015~2017 작업 보러가기</a><br> 좌우로 드래그 하면서 볼수 있어~'
+		"링크줄께~",
+		'<a href="javascript:openPortfolio(1);" style="text-decoration:underline;">2015~2022 작업 보러가기</a><br> 좌우로 드래그 하면서 볼수 있어~'
 		
 	],	
 	"특별한 작업은 없어?":[
@@ -116,7 +116,7 @@ var questionObj ={
 	],	
 	"옛날 작업 뭐있어?":[
 		"<a href='portfolio_2014/index.html' target='_blank' style='text-decoration:underline'>2015 이전 작업 보러가기</a>",
-		"위에 보러가기를 새창링크로 볼수 있을꺼야~"
+		"위에 보러가기를 새창링크로 볼수 있을꺼야~ 참고로 PC에 최적화되어 있어"
 	]
 };
 var idCursorBlink;
@@ -215,7 +215,7 @@ function sendQuestion(){
 		yoonHtml += '<div class="psa"><img src="img/psa.png"/></div>';
 		yoonHtml += '<div class="psa_name">윤초딩</div>';
 		yoonHtml += '<div class="talk_text talk_text_yoon">';
-		yoonHtml += '<span class="txt">성격 급하구나 ㅋㅋ 대답부터 듣고 질문해줘!</span>';
+		yoonHtml += '<span class="txt">성격이 급해 ㅋㅋ 대답부터 듣고 질문해줘!!</span>';
 		yoonHtml += '<div class="con_time_txt">';
 		yoonHtml += '<div class="time_txt">'+$(".wrap .time").text()+'</div>';
 		yoonHtml += '</div>';
