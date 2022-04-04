@@ -112,7 +112,7 @@ var questionObj ={
 	],	
 	"연락처는?":[
 		"작업하는거야!?",
-		"농담이구ㅋㅋ 핸폰은 010 6617 2136 이메일은 berserk78@naver.com 이니깐 스팸만 보내지 말아줘~"
+		"농담이구ㅋㅋ 이메일은 berserk78@naver.com 이니깐 스팸만 보내지 말아줘~"
 	],	
 	"옛날 작업 뭐있어?":[
 		"<a href='portfolio_2014/index.html' target='_blank' style='text-decoration:underline'>2015 이전 작업 보러가기</a>",
