@@ -32,16 +32,20 @@
                 console.log('touchstart');
                 //$('html, body').removeClass('overflow-y-hidden')
                 //$('html, body').css('touch-action','auto');
-                startX = e.targetTouches ? e.targetTouches[0].screenX : e.screenX;
-                startY = e.targetTouches ? e.targetTouches[0].screenY : e.screenY;
+                console.log(e);
+                startX = e.originalEvent.changedTouches ? e.originalEvent.changedTouches [0].screenX : e.screenX;
+                startY = e.originalEvent.changedTouches  ? e.originalEvent.changedTouches [0].screenY : e.screenY;
+                console.log(startX);
                // $('.card-slide-wrap').trigger('touchstart')
             }
             isOnce = true;
         })
         $('html, body').on('touchmove',function(e){
-            var y = e.targetTouches ? e.targetTouches[0].screenY : e.screenY;
-            var x = e.targetTouches ? e.targetTouches[0].screenX : e.screenX;
+            var x = e.originalEvent.changedTouches ? e.originalEvent.changedTouches [0].screenX : e.screenX;
+            var y = e.originalEvent.changedTouches  ? e.originalEvent.changedTouches [0].screenY : e.screenY;
             if(!isTouchMove){
+                console.log(startY);
+                console.log( Math.abs(x - startX));
                 if(Math.abs(y - startY) > Math.abs(x - startX)){
                     //스크롤허용
                     console.log('스크롤허용');
