@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="js/jquery-1.11.2.min.js" ></script>
     <title>Document</title>
+    <style>
+        html {
+    height  : 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+body {
+    height  : 100%;
+    position: relative;
+    overflow:auto;
+} 
+.overflow-y-hidden{
+  overflow: hidden;
+}
+    </style>
 </head>
 <body>
 
@@ -27,35 +44,42 @@
         $('html, body').on('touchstart',function(e){
             if(!isOnce){
                 console.log('touchstart');
-                //$('html, body').removeClass('overflow-y-hidden')
-                //$('html, body').css('touch-action','auto');
-                console.log(e);
-                startX = e.originalEvent.changedTouches ? e.originalEvent.changedTouches [0].screenX : e.screenX;
-                startY = e.originalEvent.changedTouches  ? e.originalEvent.changedTouches [0].screenY : e.screenY;
-                console.log(startX);
+                $('html, body').clearQueue().stop().stop().animate();
+                //$('html, body').addClass('overflow-y-hidden')
+                $('html, body').css('touch-action','none');
+                startX = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].screenX : e.screenX;
+                startY = e.originalEvent.changedTouches  ? e.originalEvent.changedTouches[0].screenY : e.screenY;
                // $('.card-slide-wrap').trigger('touchstart')
+           
             }
             isOnce = true;
         })
         $('html, body').on('touchmove',function(e){
-            var x = e.originalEvent.changedTouches ? e.originalEvent.changedTouches [0].screenX : e.screenX;
-            var y = e.originalEvent.changedTouches  ? e.originalEvent.changedTouches [0].screenY : e.screenY;
+            var x = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].screenX : e.screenX;
+            var y = e.originalEvent.changedTouches  ? e.originalEvent.changedTouches[0].screenY : e.screenY;
             if(!isTouchMove){
+
                 console.log(startY);
                 console.log( Math.abs(x - startX));
                 if(Math.abs(y - startY) > Math.abs(x - startX)){
+                    $('html, body').clearQueue().stop().stop().animate();
                     //스크롤허용
                     console.log('스크롤허용');
                     $('.aa').append('스크롤허용')
-                    //$('html, body').removeClass('overflow-y-hidden')
+                    $('html, body').removeClass('overflow-y-hidden')
                     $('html, body').css('touch-action','auto');
                     isWidth = false;
                 }else{
+                   
+                    
                     //스와이프허용
                     console.log('스와이프허용');
                     $('.aa').append('스와이프허용')
-                   // $('html, body').addClass('overflow-y-hidden')
+                    $('html, body').addClass('overflow-y-hidden')
                     $('html, body').css('touch-action','none');
+                    var top = $(window).scrollTop()
+                    $(window).scrollTop(top);
+                    $('html, body').animate({scrollTop:top+'px'},1000);
                     isWidth = true;
                 }
             }
@@ -65,9 +89,13 @@
         $('html, body').on('touchend',function(e){
             isTouchMove = false;
             isOnce = false;
-            console.log('touchend');
-            //$('html, body').css('touch-action','auto');
-            //$('html, body').css('touch-action','auto');
+            $('html, body').clearQueue().stop().stop().animate();
+            //$('html, body').addClass('overflow-y-hidden')
+            // var top = $(window).scrollTop()
+            //     $(window).scrollTop(top);
+            //         $('html, body').clearQueue().stop().stop().animate({scrollTop:top+'px'},100);
+           // $('html, body').css('touch-action','none');
+           // $('html, body').css('touch-action','auto');
             //$('html, body').removeClass('overflow-y-hidden')
         })
 
