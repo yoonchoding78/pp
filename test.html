@@ -30,7 +30,7 @@
         $('html, body').on('touchstart',function(e){
             if(!isOnce){
                 //$('html, body').removeClass('overflow-y-hidden')
-                //$('html, body').css('touch-action','auto');
+                $('html, body').css('touch-action','auto');
                 startX = e.targetTouches ? e.targetTouches[0].screenX : e.screenX;
                 startY = e.targetTouches ? e.targetTouches[0].screenY : e.screenY;
                // $('.card-slide-wrap').trigger('touchstart')
