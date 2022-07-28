@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js" ></script>
+    <title>Document</title>
+</head>
+<body>
+    
+
+<div class="aa" style="font-size:20px; background-color: blueviolet;height:2000px;"></div>
+
+
+
+<script>
+    
+    var html = '';
+    for(var i=0; i<100; i++){
+        html += i+'<br>';
+    }
+    $('.aa').html(html)
+
+        var startX
+        var startY
+        var isTouchMove=false;
+        var isWidth = false;
+        var isOnce = false
+        $('html, body').on('touchstart',function(e){
+            if(!isOnce){
+                //$('html, body').removeClass('overflow-y-hidden')
+                $('html, body').css('touch-action','auto');
+                startX = e.targetTouches ? e.targetTouches[0].screenX : e.screenX;
+                startY = e.targetTouches ? e.targetTouches[0].screenY : e.screenY;
+               // $('.card-slide-wrap').trigger('touchstart')
+            }
+            isOnce = true;
+        })
+        $('html, body').on('touchmove',function(e){
+            var y = e.targetTouches ? e.targetTouches[0].screenY : e.screenY;
+            var x = e.targetTouches ? e.targetTouches[0].screenX : e.screenX;
+            if(!isTouchMove){
+                if(Math.abs(y - startY) > Math.abs(x - startX)){
+                    //스크롤허용
+                    console.log('스크롤허용');
+                    //$('html, body').removeClass('overflow-y-hidden')
+                    $('html, body').css('touch-action','auto');
+                    isWidth = false;
+                }else{
+                    //스와이프허용
+                    console.log('스와이프허용');
+                   // $('html, body').addClass('overflow-y-hidden')
+                    $('html, body').css('touch-action','none');
+                    isWidth = true;
+                }
+            }
+            isTouchMove = true;
+ 
+        })
+        $('html, body').on('touchend',function(e){
+            isTouchMove = false;
+            isOnce = false;
+            $('html, body').css('touch-action','auto');
+            //$('html, body').css('touch-action','auto');
+            //$('html, body').removeClass('overflow-y-hidden')
+        })
+
+</script>
+</body>
+</html>
