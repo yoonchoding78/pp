@@ -17,11 +17,11 @@
 <script>
     
     var html = '';
-    for(var i=0; i<100; i++){
-        html += i+'12<br>';
+    for(var i=0; i<10; i++){
+        html += i+'1<br>';
     }
     $('.aa').html(html)
-
+        var $html = $('html, body');
         var startX
         var startY
         var isTouchMove=false;
@@ -29,8 +29,9 @@
         var isOnce = false
         $('html, body').on('touchstart',function(e){
             if(!isOnce){
+                console.log('touchstart');
                 //$('html, body').removeClass('overflow-y-hidden')
-                $('html, body').css('touch-action','auto');
+                //$('html, body').css('touch-action','auto');
                 startX = e.targetTouches ? e.targetTouches[0].screenX : e.screenX;
                 startY = e.targetTouches ? e.targetTouches[0].screenY : e.screenY;
                // $('.card-slide-wrap').trigger('touchstart')
@@ -44,12 +45,14 @@
                 if(Math.abs(y - startY) > Math.abs(x - startX)){
                     //스크롤허용
                     console.log('스크롤허용');
+                    $('.aa').append('스크롤허용')
                     //$('html, body').removeClass('overflow-y-hidden')
                     $('html, body').css('touch-action','auto');
                     isWidth = false;
                 }else{
                     //스와이프허용
                     console.log('스와이프허용');
+                    $('.aa').append('스와이프허용')
                    // $('html, body').addClass('overflow-y-hidden')
                     $('html, body').css('touch-action','none');
                     isWidth = true;
@@ -61,6 +64,7 @@
         $('html, body').on('touchend',function(e){
             isTouchMove = false;
             isOnce = false;
+            console.log('touchend');
             //$('html, body').css('touch-action','auto');
             //$('html, body').css('touch-action','auto');
             //$('html, body').removeClass('overflow-y-hidden')
