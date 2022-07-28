@@ -46,7 +46,7 @@ body {
                 console.log('touchstart');
                 $('html, body').clearQueue().stop().stop().animate();
                 //$('html, body').addClass('overflow-y-hidden')
-                $('html, body').css('touch-action','none');
+                //$('html, body').css('touch-action','auto');
                 startX = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0].screenX : e.screenX;
                 startY = e.originalEvent.changedTouches  ? e.originalEvent.changedTouches[0].screenY : e.screenY;
                // $('.card-slide-wrap').trigger('touchstart')
@@ -62,7 +62,6 @@ body {
                 console.log(startY);
                 console.log( Math.abs(x - startX));
                 if(Math.abs(y - startY) > Math.abs(x - startX)){
-                    $('html, body').clearQueue().stop().stop().animate();
                     //스크롤허용
                     console.log('스크롤허용');
                     $('.aa').append('스크롤허용')
@@ -70,8 +69,6 @@ body {
                     $('html, body').css('touch-action','auto');
                     isWidth = false;
                 }else{
-                   
-                    
                     //스와이프허용
                     console.log('스와이프허용');
                     $('.aa').append('스와이프허용')
@@ -79,7 +76,7 @@ body {
                     $('html, body').css('touch-action','none');
                     var top = $(window).scrollTop()
                     $(window).scrollTop(top);
-                    $('html, body').animate({scrollTop:top+'px'},1000);
+                    $('html, body').animate({scrollTop:top+'px'},500);
                     isWidth = true;
                 }
             }
@@ -89,7 +86,7 @@ body {
         $('html, body').on('touchend',function(e){
             isTouchMove = false;
             isOnce = false;
-            $('html, body').clearQueue().stop().stop().animate();
+            
             //$('html, body').addClass('overflow-y-hidden')
             // var top = $(window).scrollTop()
             //     $(window).scrollTop(top);
